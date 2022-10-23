@@ -1,0 +1,21 @@
+.sidebar-container {
+  width: 350px;
+  background-color: #ebf6ff;
+
+  height: 100vh;
+}
+.child-container {
+}
+.menu-route-wraper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+span {
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  font-weight: 600;
+}
+span:hover {
+  color: rgba(63, 116, 224, 1);
+}
