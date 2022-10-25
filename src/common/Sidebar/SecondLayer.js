@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const SecondLayer = ({ child }) => {
   
 
   return (
-    <>
+    <div >
+      <i style={{fontSize:"6px",marginRight:"12px"}} class="fa-solid fa-circle-dot"></i>
       <Link to={child?.path}>{child.title}</Link> <br />
-    </>
+    </div>
   );
 };
 

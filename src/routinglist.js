@@ -1,6 +1,9 @@
-import HomeView from "./modules/Home/View/HomeView";
-import PurchaseOrder from "./modules/Purchase/purchaseorder/view/PurchaseOrder";
-import PurchaseRequest from "./modules/Purchase/request/view/PurchaseRequest";
+import React from "react";
+
+const PurchaseRequest = React.lazy(() => import('./modules/Purchase/request/view/PurchaseRequest'));
+const PurchaseOrder = React.lazy(() => import('./modules/Purchase/purchaseorder/view/PurchaseOrder'));
+const HomeView = React.lazy(() => import('./modules/Home/View/HomeView'));
+
 
 
 export const routingList=[

@@ -11,6 +11,12 @@
   align-items: center;
   cursor: pointer;
 }
+.first-level-title{
+  margin-left: 12px;
+  font-size: 14px;
+  color: gray;
+  
+}
 span {
   color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
@@ -18,4 +24,21 @@ span {
 }
 span:hover {
   color: rgba(63, 116, 224, 1);
+}
+.parent-menu-item{
+  margin: 0;
+  padding: 5px 8px;
+
+}
+.parent-menu-item li{
+ list-style: none;
+}
+.parent-menu-item a{
+  text-decoration: none;
+  color: gray;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ismatch{
+ color: red;
 }
