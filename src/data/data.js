@@ -20,19 +20,19 @@ export const sidebarData=[
             {
                 id:3,
                 title:"Purchase Receive",
-                path:"/purchase/purchaseorder",
+                path:"/purchase/purchasereveive",
 
             },
             {
                 id:4,
                 title:"Purchase Payment",
-                path:"purchase4",
+                path:"/purchase/purchasepayment",
 
             },
             {
                 id:5,
                 title:"Purchase Return",
-                path:"purchase5",
+                path:"/purchase/purchasereturn",
 
             },
             {
