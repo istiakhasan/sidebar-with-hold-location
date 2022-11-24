@@ -15,13 +15,14 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {props?.tableheaders.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            sx={headCell.style}
-            align={headCell.numeric ? "left" : "left"}
-          >
-            {headCell.label}
-          </TableCell>
+          headCell.isActive? <TableCell
+          key={headCell.id}
+          sx={headCell.style}
+          align={headCell.numeric ? "left" : "left"}
+        >
+          {headCell.label}
+        </TableCell>:null
+         
         ))}
       </TableRow>
     </TableHead>
@@ -39,10 +40,11 @@ export default function CustomCommonTable({ tableheaders, children }) {
   };
 
   return (
-    <Box sx={{ width: "100%", padding: "18px" }}>
+    <Box sx={{ width: "100%", padding: "0 18px" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer sx={{ padding: "0 20px" }}>
-          <Table
+          <Table 
+          
             sx={{ minWidth: 750, padding: "" }}
             aria-labelledby="tableTitle"
             // size={dense ? 'small' : 'medium'}

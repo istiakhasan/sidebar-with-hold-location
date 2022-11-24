@@ -1,9 +1,12 @@
 import React from "react";
 import MainLayout from "./common/MainLayout";
 import PurchasePayment from "./modules/Purchase/purchasePayment/view/PurchasePayment";
+import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseReport";
 import PurchaseReturn from "./modules/Purchase/purchasereturn/view/PurchaseReturn";
 
 import PurchaseReveive from "./modules/Purchase/purchasereveive/view";
+import FormikYup from "./modules/sales/FormikYup/FormikYup";
+import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
 
 const PurchaseRequest = React.lazy(() =>
   import("./modules/Purchase/request/view/PurchaseRequest")
@@ -46,5 +49,20 @@ export const routingList = [
     id: 5,
     path: "/purchase/purchasereturn",
     component: <PurchaseReturn />,
+  },
+  {
+    id: 6,
+    path: "/purchase/purchaseReport",
+    component: <PurchaseReport />,
+  },
+  {
+    id: 7,
+    path: "/sales/salesquotaion",
+    component: <SalesQuotation />,
+  },
+  {
+    id: 7,
+    path: "/sales/formikyup",
+    component: <FormikYup />,
   },
 ];

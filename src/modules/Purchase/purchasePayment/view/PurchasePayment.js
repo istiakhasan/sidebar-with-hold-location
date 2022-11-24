@@ -1,11 +1,14 @@
-import { TableCell, TablePagination, TableRow } from "@mui/material";
-import React, { useEffect } from "react";
+import { Button, TableCell, TablePagination, TableRow } from "@mui/material";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Pagination from "react-custom-pagination";
+import { useReactToPrint } from "react-to-print";
 import CustomCommonTable from "../../../../common/CustomCommonTable";
 import CustomPagination from "../../../../common/CustomPagination";
+import ReactToPdf from "react-to-pdf";
 
 import MainLayout from "../../../../common/MainLayout";
+import CommonPrintButton from "../../../../common/CommonPrintButton";
 
 const PurchasePayment = () => {
   const tableheaders = [
@@ -91,25 +94,42 @@ const PurchasePayment = () => {
   useEffect(() => {
     generateTableData();
   }, []);
+  const componentRef = useRef();
+
+  const ref = React.createRef();
 
   return (
     <MainLayout>
-      <CustomCommonTable tableheaders={tableheaders}>
-        {array.map((item) => (
-          <TableRow key={item.id}>
-            <TableCell>{item.id}</TableCell>
-            <TableCell>{item.customer}</TableCell>
-            <TableCell>{item.invoice}</TableCell>
-            <TableCell>{item.challan}</TableCell>
-            <TableCell>{item.amount}</TableCell>
-            <TableCell>{item.sales}</TableCell>
-            <TableCell>{item.date}</TableCell>
-            <TableCell>{item.status}</TableCell>
-            <TableCell>{item.action}</TableCell>
-          </TableRow>
-        ))}
-      </CustomCommonTable>
-      <CustomPagination row={row} setNewArray={setNewArray} />
+      <div className="table-responsive" ref={componentRef}>
+        <CommonPrintButton componentRef={componentRef} />
+        <ReactToPdf
+          targetRef={ref}
+          filename="div-blue.pdf"
+          x={0.5}
+          y={0.5}
+          scale={0.8}
+        >
+          {({ toPdf }) => <button onClick={toPdf}>Generate pdf</button>}
+        </ReactToPdf>
+        <div ref={ref}>
+          <CustomCommonTable tableheaders={tableheaders}>
+            {array.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.customer}</TableCell>
+                <TableCell>{item.invoice}</TableCell>
+                <TableCell>{item.challan}</TableCell>
+                <TableCell>{item.amount}</TableCell>
+                <TableCell>{item.sales}</TableCell>
+                <TableCell>{item.date}</TableCell>
+                <TableCell>{item.status}</TableCell>
+                <TableCell>{item.action}</TableCell>
+              </TableRow>
+            ))}
+          </CustomCommonTable>
+        </div>
+        <CustomPagination row={row} setNewArray={setNewArray} />
+      </div>
     </MainLayout>
   );
 };

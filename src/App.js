@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { routingList } from "./routinglist";
+import Example from "./common/example/Example";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             }
           />
         ))}
+        <Route path={"/example/:id/:type"} element={<Example />} />
       </Routes>
     </div>
   );

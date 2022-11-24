@@ -38,7 +38,7 @@ export const sidebarData=[
             {
                 id:6,
                 title:"Purchase Report ",
-                path:"purchase",
+                path:"/purchase/purchaseReport",
 
             },
         ]
@@ -52,13 +52,13 @@ export const sidebarData=[
             {
                 id:2,
                 title:"Sales Quotation",
-                path:"purchase",
+                path:"/sales/salesquotaion",
 
             },
             {
                 id:7,
-                title:"Sales Order",
-                path:"purchase",
+                title:"Formik Yup Validation",
+                path:"/sales/formikyup",
 
             },
             {
