@@ -128,7 +128,7 @@ console.log(values,"values checked")
             onChange={handleChange}
             placeholder="Age"
             name="age"
-            type="text"
+            type="number"
           />{" "}
           <br />
           {errors.fruits && (

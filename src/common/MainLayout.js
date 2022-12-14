@@ -7,7 +7,7 @@ const MainLayout = ({ children }) => {
       <div style={{ width: "300px" }}>
         <Sidebar />
       </div>
-      <div style={{ flex: "1", padding: "20px" }}>{children}</div>
+      <div style={{ flex: "1", paddingLeft: "50px",minHeight:"100vh" }}>{children}</div>
     </div>
   );
 };

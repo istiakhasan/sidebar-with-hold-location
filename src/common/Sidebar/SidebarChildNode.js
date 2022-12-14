@@ -36,7 +36,7 @@ const SidebarChildNode = ({ item: element, index, click, setClick, data }) => {
           style={{ cursor: "pointer" }}
         >
           <i className={element.icon}></i>
-          <span className={`first-level-title ${isMatch===element.title&&"ismatch"}`}>
+          <span style={{color:"#EEEEEE"}} className={`first-level-title ${isMatch===element.title&&"ismatch"}`}>
 
           {element.title}
           </span>

@@ -1,5 +1,5 @@
 import { Paper, Popper, Typography } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import MainLayout from "../../../common/MainLayout";
 import MonthlyInvolve from "../../../common/MonthlyInvolve";
 import Involve from "../../../asset/images/involve-1.png";
@@ -7,8 +7,10 @@ import Involve2 from "../../../asset/images/involve-2.png";
 import Involve3 from "../../../asset/images/involve-3.png";
 import Involve4 from "../../../asset/images/involve-4.png";
 import ReactApexChart from "react-apexcharts";
+import { Formik } from "formik";
 
 const HomeView = () => {
+  const formRef = useRef();
   const state = {
     series: [
       {
@@ -32,13 +34,12 @@ const HomeView = () => {
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: "55%",
+          columnWidth: "40%",
           endingShape: "rounded",
           borderRadius: 0,
-          width:"140px",
-          innerWidth:"150px"
+          width: "100px",
+          innerWidth: "150px",
         },
-        
       },
       dataLabels: {
         enabled: false,
@@ -78,10 +79,102 @@ const HomeView = () => {
       },
     },
   };
+  let item = [];
+  let obj = {};
+  const calculateTotal = (values) => {
+    obj = values;
+    const totalField = Object.values(obj);
+    let total = totalField.reduce((a, b) => Number(a) + Number(b), 0);
+    formRef?.current?.setFieldValue("field3", total);
+  };
+  const calculateAverage = (v, field,isTrue) => {
+    console.log(obj,"object",Object.keys(obj).length,+v)
+   const average=+v / Object.keys(obj).length
+   console.log(average,"average",console.log(obj))
+    for(let field in obj){
+      formRef?.current?.setFieldValue([field], average)
+      console.log(field)
+     }
+   
+  };
+
   return (
-    <div className="container-fluid p-0">
+    <div className="">
       <MainLayout>
-        <div>
+        <div className="global-wrappar-shadow">
+          <div>
+            <h1>Anywhere in your app!</h1>
+            <Formik
+              initialValues={{ field1: "", field2: "", field3: "" }}
+              innerRef={formRef}
+              onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                  alert(JSON.stringify(values, null, 2));
+                  setSubmitting(false);
+                }, 400);
+              }}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+                setFieldValue,
+                /* and other goodies */
+              }) => (
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="number"
+                    name="field1"
+                    // onChange={handleChange}
+                    onChange={(e) => {
+                      setFieldValue("field1", e.target.value);
+
+                      calculateTotal({...values, field1:e.target.value});
+                    }}
+                    value={values.field1}
+                  />
+                  {errors.email && touched.email && errors.email}
+                  <input
+                    type="number"
+                    name="field2"
+                    onChange={(e) => {
+                      setFieldValue("field2", e.target.value);
+
+                      calculateTotal({...values, field2:e.target.value});
+                    }}
+                    // onChange={handleChange}
+                    value={values.field2}
+                  />
+
+                  <input
+                    type="number"
+                    name="field3"
+                    // onBlur={(e) => {
+                    //   setFieldValue("field3", e.target.value);
+                    //   const a = Object.keys(values);
+                    //   const sliched = a.slice(0, a.length - 2);
+
+                    //   sliched.forEach((item) =>
+                    //     setFieldValue(item, e.target.value / sliched.length)
+                    //   );
+                    // }}
+                    onChange={(e)=>{
+                      setFieldValue("field3", e.target.value);
+                      calculateAverage(e.target.value, "field3",false);
+                    }}
+                    // onBlur={handleBlur}
+                    value={values.field3}
+                  />
+                </form>
+              )}
+            </Formik>
+          </div>
+
+          {/* <div>
           <p
             style={{ fontSize: "15px", fontWeight: "500", color: "#1d2939" }}
             className="m-0 p-0"
@@ -123,9 +216,9 @@ const HomeView = () => {
             ></MonthlyInvolve>
           </div>
 
-          <Paper variant="outlined">
-            <div className="col-md-8">
-              <div id="chart">
+         
+            
+              <div style={{background:"white",width:"90%",margin:"0 auto"}} id="chart">
                 <ReactApexChart
                  
                   options={state.options}
@@ -134,10 +227,11 @@ const HomeView = () => {
                   height={390}
                 />
               </div>
-            </div>
-            <div className="col-md-4"></div>
-          </Paper>
+           
+         
+       
           <div className="col-md-6"></div>
+        </div> */}
         </div>
       </MainLayout>
     </div>

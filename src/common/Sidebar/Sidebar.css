@@ -55,7 +55,7 @@ span:hover {
 .custom-scroll::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px rgb(217, 203, 203); 
   border-radius: 15px;
-  background-color: white !important;
+  background-color: #423F3E !important;
 }
  
 /* Handle */

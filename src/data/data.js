@@ -3,7 +3,7 @@ export const sidebarData=[
         id:1,
         title:"Purchase",
         path:"purchase",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-solid fa-file-invoice",
         children:[
             {
                 id:2,
@@ -47,7 +47,7 @@ export const sidebarData=[
         id:2,
         title:"Sales",
         path:"purchase",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-solid fa-universal-access",
         children:[
             {
                 id:2,
@@ -63,8 +63,8 @@ export const sidebarData=[
             },
             {
                 id:3,
-                title:"Sales Delivery",
-                path:"purchase",
+                title:"Calendar",
+                path:"/sales/calander",
 
             },
             {
@@ -166,7 +166,7 @@ export const sidebarData=[
         id:4,
         title:"HR",
         path:"purchase",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-solid fa-file",
         children:[
             {
                 id:2,
@@ -268,7 +268,7 @@ export const sidebarData=[
         id:6,
         title:"Asset",
         path:"purchase",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-solid fa-glass-water",
         children:[
             {
                 id:2,
@@ -373,7 +373,7 @@ export const sidebarData=[
             {
                 id:7,
                 title:"Item Profile",
-                path:"purchase",
+                path:"/configaration/partner",
 
             },
             {

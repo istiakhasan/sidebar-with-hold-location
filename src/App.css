@@ -1,3 +1,10 @@
+body {
+  color: white !important;
+}
+.MuiBox-root.css-19kzrtu {
+  padding: 12px 0 !important;
+}
+/* custom table  */
 .table-responsive {
   width: 90%;
   margin: 0 auto;
@@ -5,4 +12,20 @@
 .table-responsive table td {
   font-size: 12px;
   color: #5a5a55;
+}
+
+/*global box shadow   */
+.global-wrappar-shadow {
+  padding: 8px 12px;
+  background: #423f3e;
+  height: 100vh;
+  width: 100%;
+  box-shadow: 42px 42px 81px #3a3737, -42px -42px 81px #4a4745;
+}
+
+/* header  */
+.header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }

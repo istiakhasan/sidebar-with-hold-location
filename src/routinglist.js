@@ -1,10 +1,12 @@
 import React from "react";
 import MainLayout from "./common/MainLayout";
+import PartnerTabs from "./modules/configaration/partner/PartnerTabs";
 import PurchasePayment from "./modules/Purchase/purchasePayment/view/PurchasePayment";
 import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseReport";
 import PurchaseReturn from "./modules/Purchase/purchasereturn/view/PurchaseReturn";
 
 import PurchaseReveive from "./modules/Purchase/purchasereveive/view";
+import CustomCalnder from "./modules/sales/CustomCalandar/CustomCalnder";
 import FormikYup from "./modules/sales/FormikYup/FormikYup";
 import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
 
@@ -64,5 +66,15 @@ export const routingList = [
     id: 7,
     path: "/sales/formikyup",
     component: <FormikYup />,
+  },
+  {
+    id: 8,
+    path: "/sales/calander",
+    component: <CustomCalnder />,
+  },
+  {
+    id: 8,
+    path: "/configaration/partner",
+    component: <PartnerTabs />,
   },
 ];
