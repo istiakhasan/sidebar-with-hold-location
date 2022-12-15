@@ -69,7 +69,7 @@ const PurchaseReport = () => {
   }
 };
   return (
-    <MainLayout>
+    <>
       <CustomCommonTable tableheaders={tableTh} >
       {tableData.map((item) => (
               <TableRow key={item.id}>
@@ -94,7 +94,7 @@ const PurchaseReport = () => {
           />
         ))}
       </div>
-    </MainLayout>
+    </>
   );
 };
 

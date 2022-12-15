@@ -1,4 +1,3 @@
-
 /* 
 
 bodycolor=#2B2B2B
@@ -6,11 +5,30 @@ wrapercolor=#423F3E
 wrapertwocolor=#171010
 buttoncolor=#362222
 */
+
+/* 
+white color palet 
+bodycolor=#eaf6f6
+buttoncolor=#66bfbf 
+background=#fcfefe
+
+backgroundcolor2=#f76b8a
+
+
+*/
 body {
-background-color: #2B2B2B !important;
+  background-color: #fcfefe !important;
+}
+
+
+.common-background-color{
+  background: #fcfefe;
+}
+.component-background-color{
+  background: #eaf6f6;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

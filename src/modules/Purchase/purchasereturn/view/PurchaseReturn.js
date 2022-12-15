@@ -48,7 +48,7 @@ const PurchaseReturn = () => {
   const [newArray,setNewArray]=useState([])
   console.log(tableData,"table data")
   return (
-    <MainLayout>
+   
       <>
       <CustomCommonTable tableheaders={posts}>
          {
@@ -84,7 +84,7 @@ const PurchaseReturn = () => {
           />
         </div> */}
       </>
-    </MainLayout>
+ 
   );
 };
 

@@ -13,7 +13,11 @@ const CounterReducers=(state=initialValues,action)=>{
         case "ADD_TO_CART":
             return {...state,value:state.value+1}
         default: 
-        return state
+        case "PRODUCT_LOAD":
+        return {
+            ...state,
+            product:action.payload
+        }
     }
 
 }

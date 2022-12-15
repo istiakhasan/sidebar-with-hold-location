@@ -99,7 +99,7 @@ const PurchasePayment = () => {
   const ref = React.createRef();
 
   return (
-    <MainLayout>
+    <>
       <div className="table-responsive" ref={componentRef}>
         <CommonPrintButton componentRef={componentRef} />
         <ReactToPdf
@@ -130,7 +130,7 @@ const PurchasePayment = () => {
         </div>
         <CustomPagination row={row} setNewArray={setNewArray} />
       </div>
-    </MainLayout>
+    </>
   );
 };
 

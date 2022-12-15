@@ -41,7 +41,7 @@ const PurchaseReveive = () => {
   ];
 
   return (
-    <MainLayout>
+    <div className="container-fluid">
       <CustomModal setShow={setShow} show={show}>
         
       <TableContainer sx={{marginTop:"10px"}} component={Paper}>
@@ -114,7 +114,7 @@ const PurchaseReveive = () => {
           </div>
         </div>
       </div>
-    </MainLayout>
+    </div>
   );
 };
 
