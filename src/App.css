@@ -1,12 +1,13 @@
-
 .MuiBox-root.css-19kzrtu {
   padding: 12px 0 !important;
 }
+
 /* custom table  */
 .table-responsive {
   width: 90%;
   margin: 0 auto;
 }
+
 .table-responsive table td {
   font-size: 12px;
   color: #5a5a55;
@@ -33,10 +34,46 @@
 
 /* common input field  */
 
-.js-input{
+.js-input {
   width: 100%;
   border: 0.5px solid rgb(188, 185, 185);
   padding: 10px 18px;
   outline: none;
   font-size: 12px;
+}
+
+
+/* profile submenu  */
+
+.profile-submenu {
+  font-size: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-weight: 500;
+  color: #000000;
+
+}
+
+.profile-submenu:hover {
+  /* color: rgb(60, 44, 165); */
+  /* background-color: #929288; */
+
+ color: #000000;
+
+
+}
+
+.submenu-wrapper {
+  
+  border-radius: 2px;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 222;
+  padding:  8px;
+
+}
+.submenu-wrapper:hover{
+  background-color: #CCD0D5;
 }

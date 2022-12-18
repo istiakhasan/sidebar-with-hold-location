@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { sidebarData } from "../../data/data";
 import "./Sidebar.css";
 import SidebarChildNode from "./SidebarChildNode";
@@ -9,13 +9,12 @@ export const Sidebar = () => {
     <div
       className="custom-scroll"
       style={{
-        width: "250px",
         background: "#eaf6f6",
-        position: "fixed",
+
         height: "90vh",
-        padding: "8px 15px",
+
         overflow: "scroll",
-        bottom:0
+        bottom: 0,
       }}
     >
       <div>

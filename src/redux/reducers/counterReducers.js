@@ -1,7 +1,8 @@
 const initialValues={
     value:0,
     product:[],
-    cart:[]
+    cart:[],
+    menuToggle:true
 }
 
 
@@ -17,6 +18,11 @@ const CounterReducers=(state=initialValues,action)=>{
         return {
             ...state,
             product:action.payload
+        }
+        case "TOGGLE_BAR":
+        return {
+            ...state,
+            menuToggle:!state.menuToggle
         }
     }
 
