@@ -1,7 +1,7 @@
 import { Modal } from "react-bootstrap";
 import React from "react";
 
-const CustomModal = ({ children, show, setShow, title }) => {
+const CustomModal = ({ children, show, setShow, title ,handleSubmit}) => {
   const handleClose = () => setShow(false); //hide modal using  click in other side of the modal
 
   return (
@@ -13,7 +13,7 @@ const CustomModal = ({ children, show, setShow, title }) => {
           size={"xl"}
           aria-labelledby="example-modal-sizes-title-xl"
         >
-          <div style={{background:""}} >
+          <div style={{ background: "" }}>
             <div
               style={{
                 margin: "15px 18px",
@@ -23,9 +23,9 @@ const CustomModal = ({ children, show, setShow, title }) => {
             >
               <div className="d-flex mb-3  align-items-center justify-content-between">
                 <span>{title} </span>
-                <button className="btn btn-success btn-sm px-4">Save</button>
+                <button type="submit" onClick={handleSubmit} className="btn btn-success btn-sm px-4">Save</button>
               </div>
-              <div style={{  }}>{children}</div>
+              <div style={{}}>{children}</div>
 
               <div className="text-end mt-3">
                 <button

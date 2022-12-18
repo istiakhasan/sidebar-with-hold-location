@@ -1,53 +1,37 @@
-import { Button } from "@mui/material";
-import React from "react";
+import { useFormik } from "formik";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import CustomModal from "../../../../common/CustomModal";
-import JsFormInput from "../../../../common/JsFormInput";
-import Jsinput from "../../../../common/Jsinput";
-
+import PartnerForm from "../form/PartnerForm";
+import JsButton from "../../../../common/JsButton";
 const PartnerLanding = () => {
   const [show, setShow] = useState(false);
+  const { handleSubmit, handleChange, values } = useFormik({
+    initialValues: { name: "", phone: "" },
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
-    <div>
-      <div className="header ">
-        <Button onClick={() => setShow(true)} variant="contained">
-          + Add Partner
-        </Button>
-      </div>
-
-
- 
+    <>
+      <JsButton style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px"
+      }} onClick={() => setShow(true)}>+ Add Partner</JsButton>
 
       {/* add partner modal  */}
       <CustomModal
+        handleSubmit={handleSubmit}
         setShow={setShow}
         title={"Partner Create"}
         show={show}
       >
-             <div className="global-wrappar-shadow">
-          <div className="row p-0">
-            <div className="col-md-3">
-              <JsFormInput name="name" placeholder="Name.." label={"Partner Name"} />
-            </div>
-            <div className="col-md-3">
-              <JsFormInput name="name" placeholder="Name.." label={"Partner Name"} />
-            </div>
-            <div className="col-md-3">
-              <JsFormInput name="name" placeholder="Name.." label={"Partner Name"} />
-            </div>
-            <div className="col-md-3">
-              <JsFormInput name="name" placeholder="Name.." label={"Partner Name"} />
-            </div>
-            <div className="col-md-3">
-              <JsFormInput name="name" placeholder="Name.." label={"Partner Name"} />
-            </div>
-            <div className="col-md-3">
-              <JsFormInput name="name" placeholder="Name.." label={"Partner Name"} />
-            </div>
-          </div>
-      </div>
+        <PartnerForm handleChange={handleChange} handleSubmit={handleSubmit} />
       </CustomModal>
-    </div>
+    </>
   );
 };
 
