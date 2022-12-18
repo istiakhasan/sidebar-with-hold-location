@@ -7,7 +7,6 @@ import Tab from "@mui/material/Tab";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import PartnerLanding from "./landing/PartnerLanding";
-import { useEffect } from "react";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,23 +47,23 @@ const PartnerTabs = () => {
   };
 
   return (
-    <MainLayout>
-      <div style={{position:"relative"}} className='global-wrappar-shadow '>
-
-     
+    <div style={{ position: "relative" }} className=" ">
       <Tabs
         value={value}
         onChange={handleChange}
         aria-label="basic tabs example"
       >
-        <Tab className="text-white" label="Partner" {...a11yProps(0)} />
+        <Tab
+          className="text-white"
+          label={<p style={{ color: "black",fontWeight:"bold" }}>Partner</p>}
+          {...a11yProps(0)}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
         <PartnerLanding />
       </TabPanel>
-      </div>
-    </MainLayout>
+    </div>
   );
 };
 

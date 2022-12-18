@@ -5,7 +5,7 @@ const SecondLayer = ({ child }) => {
   
 
   return (
-    <div style={{display:"flex",alignItems:"center"}}>
+    <div style={{display:"flex",alignItems:"center",whiteSpace:"nowrap"}}>
       <i style={{fontSize:"6px",marginRight:"12px"}} className="fa-solid fa-circle-dot"></i>
       <Link to={child?.path}>{child.title}</Link> <br />
     </div>

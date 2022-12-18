@@ -31,7 +31,7 @@ const SidebarChildNode = ({ item: element, index, click, setClick, data }) => {
             setClick(element.id);
           }
         }}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer",whiteSpace:"nowrap" }}
       >
         <i className={element.icon}></i>
         <span

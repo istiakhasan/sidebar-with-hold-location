@@ -10,7 +10,7 @@ export const Sidebar = () => {
       className="custom-scroll"
       style={{
         background: "#eaf6f6",
-
+        padding:"10px 4px",
         height: "90vh",
 
         overflow: "scroll",

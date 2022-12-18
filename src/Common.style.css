@@ -1,0 +1,14 @@
+.link-color{
+    color: #1877f2;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: inherit;
+    text-decoration: underline;
+     cursor: pointer;
+}
+.common-mui-button{
+    background: #f76b8a !important;
+    font-size: 11px !important;
+    color:#eaf6f6 !important;
+    font-weight: bold !important;
+}

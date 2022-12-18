@@ -58,7 +58,7 @@ span:hover {
   /* border-radius: 10px; */
 }
 .custom-scroll::-webkit-scrollbar {
-  width: 5px;
+  width: 2px;
 }
 
 /* Track */
@@ -78,6 +78,4 @@ span:hover {
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background: #b30000;
 }
-.robin{
-  
-}
+

@@ -1,32 +1,82 @@
-import React from "react";
+import React, { useState } from "react";
 import loginimg from "../asset/images/login/login.jpg";
 import JsButton from "../common/JsButton";
 import Jsinput from "../common/Jsinput";
 import { useFormik } from "formik";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import * as yup from "yup";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import auth from "../firebase.config/firebase.config";
 import { useNavigate } from "react-router-dom";
+import Loading from "../common/loding";
+
+let signUpValidation = yup.object().shape({
+  name: yup.string().required("Name is required"),
+
+  email: yup.string().required("Email is required"),
+  password: yup.string().required("Password is required"),
+  mobileno: yup.string().required("Phone number is required"),
+});
+let loginValidation = yup.object().shape({
+  email: yup.string().required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
+
 const Login = () => {
-    const navigate=useNavigate()
-    const [
-        signInWithEmailAndPassword,
-        user,
-        loading,
-        error,
-      ] = useSignInWithEmailAndPassword(auth);
-  const { handleSubmit, handleChange } = useFormik({
-    initialValues: { mobileno: "", password: "" },
-    onSubmit: (values) => {
-      signInWithEmailAndPassword(values.mobileno,values.password)
+  // all use state  start
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  // all use state end
+  const navigate = useNavigate();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const [
+    createUserWithEmailAndPassword,
+    CreateUser,
+    signUploading,
+    signUperror,
+  ] = useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
+
+  const { handleSubmit, handleChange, errors, touched } = useFormik({
+    initialValues: { mobileno: "", password: "", name: "", email: "" },
+    validationSchema: isSignUp ? signUpValidation : loginValidation,
+
+    onSubmit: async (values) => {
+      if (!isSignUp) {
+        signInWithEmailAndPassword(values.email, values.password);
+      } else {
+        await createUserWithEmailAndPassword(values.email, values.password);
+        await updateProfile({
+          displayName: values.name,
+          phoneNumber: values.mobileno,
+        });
+      }
     },
   });
-  if(user){
-    navigate("/")
+  if (error || signUperror || updateerror) {
+    return;
   }
-  console.log(user,"user")
+  if (loading || signUploading || updating) {
+    return <Loading />;
+  }
+  if (user) {
+    console.log(CreateUser, "users");
+    navigate("/");
+  }
+
   return (
     <div className="min-vh-100  container-fluid ">
-      <div className="row component-background-color">
+      <div
+        className={`row ${
+          isSignUp ? "flex-row-reverse" : ""
+        }  component-background-color`}
+      >
+        {/* <div className="row flex-row-reverse flex-lg-row component-background-color"> */}
         <div className="col-lg-6 vh-100 p-0 d-none d-lg-block">
           <img
             style={{ objectFit: "cover" }}
@@ -39,7 +89,8 @@ const Login = () => {
           <div
             style={{
               padding: " 40px",
-              height: "400px",
+              minHeight: "400px",
+              height: "auto",
               width: "488px",
               border: "3px solid #fcfefe",
             }}
@@ -53,30 +104,66 @@ const Login = () => {
                   fontWeight: "600",
                 }}
               >
-                Login
+                {!isSignUp ? "LOGIN" : "SIGN UP"}
               </p>
-              <div>
+              {isSignUp && (
+                <div className="">
+                  <Jsinput
+                    type={"text"}
+                    placeholder={"Enter your name.."}
+                    className={"js-input"}
+                    name="name"
+                    error={errors.name}
+                    touched={touched}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
+              <div className="mt-4">
                 <Jsinput
                   type={"email"}
-                  placeholder={"Enter your Phone Number.."}
+                  placeholder={"Enter your email.."}
                   className={"js-input"}
-                  autoComplete={"false"}
-                  name="mobileno"
+                  name="email"
+                  error={errors.email}
                   onChange={handleChange}
                 />
               </div>
+              {isSignUp && (
+                <div className="mt-4">
+                  <Jsinput
+                    type={"text"}
+                    placeholder={"Enter your phone.."}
+                    className={"js-input"}
+                    name="mobileno"
+                    error={errors.mobileno}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
               <div className="mt-4">
                 <Jsinput
                   type={"password"}
-                  placeholder={"Enter your Phone Number.."}
+                  placeholder={"Enter your password.."}
                   className={"js-input"}
                   name="password"
+                  error={errors.password}
                   onChange={handleChange}
                 />
               </div>
               <div className="mt-4">
                 <JsButton type={"Submit"} variant="contained">
                   Sign In
+                </JsButton>
+              </div>
+
+              <small className="link-color">Forgotten password?</small>
+              <div className="mt-5 text-center">
+                <JsButton
+                  onClick={() => setIsSignUp(!isSignUp)}
+                  variant="contained"
+                >
+                  {!isSignUp ? "CREATE AN ACCOUNT" : "LOG IN"}
                 </JsButton>
               </div>
             </form>

@@ -43,7 +43,9 @@ const TopMenuBar = () => {
           objectFit:"cover",
           borderRadius:"50%",
           marginRight:"50px",
-          cursor:"pointer"
+          cursor:"pointer",
+          border:"3px solid #66bfbf",
+          padding:"2px"
 
          }} className="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRctBcqMcFNJLixeaxBbPovatcYynLgmda33w&usqp=CAU" alt="" />
 

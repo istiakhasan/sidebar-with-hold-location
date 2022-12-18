@@ -13,7 +13,7 @@ const CustomModal = ({ children, show, setShow, title }) => {
           size={"xl"}
           aria-labelledby="example-modal-sizes-title-xl"
         >
-          <div style={{background:"#181818"}} >
+          <div style={{background:""}} >
             <div
               style={{
                 margin: "15px 18px",
@@ -21,13 +21,13 @@ const CustomModal = ({ children, show, setShow, title }) => {
                 padding: "5px 8px",
               }}
             >
-              <div className="d-flex  align-items-center justify-content-between">
+              <div className="d-flex mb-3  align-items-center justify-content-between">
                 <span>{title} </span>
                 <button className="btn btn-success btn-sm px-4">Save</button>
               </div>
-              <div style={{ minHeight: "400px" }}>{children}</div>
+              <div style={{  }}>{children}</div>
 
-              <div className="text-end">
+              <div className="text-end mt-3">
                 <button
                   onClick={() => setShow(false)}
                   className="btn btn-danger btn-sm px-4"

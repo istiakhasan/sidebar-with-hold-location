@@ -10,7 +10,7 @@ import Login from "./login/Login";
 import MainLayout from "./common/MainLayout";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.config/firebase.config";
-import TopMenuBar from "./common/TopMenu/TopMenuBar";
+import "./Common.style.css";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
@@ -29,8 +29,8 @@ const App = () => {
       }
     });
   }, []);
-  if(loading){
-    return <Loading />
+  if (loading) {
+    return <Loading />;
   }
   if (!user) {
     return (

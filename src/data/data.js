@@ -379,7 +379,7 @@ export const sidebarData=[
             {
                 id:3,
                 title:"Partner Profile",
-                path:"purchase",
+                path:"/configaration/partner",
 
             },
             {

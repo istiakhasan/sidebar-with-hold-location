@@ -1,10 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "./Sidebar/Sidebar";
 import TopMenuBar from "./TopMenu/TopMenuBar";
 
 const MainLayout = ({ children }) => {
   const { menuToggle } = useSelector((state) => state.CounterReducers);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (window?.innerWidth < 800) {
+      dispatch({ type: "TOGGLE_BAR" });
+    }
+  }, [dispatch]);
+
   return (
     <div
       style={{
@@ -25,8 +33,13 @@ const MainLayout = ({ children }) => {
         <div
           style={
             menuToggle
-              ? { width: "250px", transition: "1s ease ",left:"0%", overflow: "hidden" }
-              : {left:"-50%",width: 0,position:"relative", transition: "1s ease ", overflow: "hidden" }
+              ? {
+                  width: "250px",
+                  transition: "1s ease ",
+                  left: "0%",
+                  overflow: "hidden",
+                }
+              : { width: 0, transition: "1s ease ", overflow: "hidden" }
           }
         >
           <Sidebar />
@@ -35,10 +48,9 @@ const MainLayout = ({ children }) => {
           className="custom-scroll"
           style={{
             flex: "1",
-            paddingLeft: "35px",
-            marginTop: "20px",
-            overflow: "scroll",
-            height: "100vh",
+            padding: "20px",
+            minHeight:"80vh",   
+            height: "auto",
           }}
         >
           {children}
