@@ -88,3 +88,9 @@
 .submenu-wrapper:hover{
   background-color: #CCD0D5;
 }
+
+@media screen and (min-width: 480px) {
+#sidebar-wrapper{
+  position: relative !important;
+}
+}

@@ -26,7 +26,7 @@ const TopMenuBar = () => {
       }}
     >
       <span onClick={()=>dispatch({type:"TOGGLE_BAR"})} className="d-flex justify-content-between align-items-center d-inline-block h-100 ms-3">
-       {menuToggle? <MuiCommonIcon name="menu" size="large" />:
+       {!menuToggle? <MuiCommonIcon name="menu" size="large" />:
         <MuiCommonIcon name="cancel" size="large" />}
        
       </span>

@@ -7,18 +7,16 @@ import TopMenuBar from "./TopMenu/TopMenuBar";
 const MainLayout = ({ children }) => {
   const { menuToggle } = useSelector((state) => state.CounterReducers);
   const dispatch = useDispatch();
-  
 
   useEffect(() => {
-    window.addEventListener('resize', ()=>{
-      if(window.innerWidth<500){
-        dispatch({ type: "TOGGLE_AUTO" })
-      }else{
-        dispatch({type:"TOGGLE_CLOSE"})
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 700) {
+        dispatch({ type: "TOGGLE_AUTO" });
+      } else {
+        dispatch({ type: "TOGGLE_CLOSE" });
       }
     });
-   
-  }, [])
+  }, []);
 
   return (
     <div
@@ -38,6 +36,7 @@ const MainLayout = ({ children }) => {
       </div>
       <div style={{ display: "flex" }}>
         <div
+          id="sidebar-wrapper"
           style={
             menuToggle
               ? {
@@ -45,8 +44,16 @@ const MainLayout = ({ children }) => {
                   transition: "1s ease ",
                   left: "0%",
                   overflow: "hidden",
+                  position: "absolute",
+                  zIndex: 222,
                 }
-              : { width: 0, transition: "1s ease ", overflow: "hidden" }
+              : {
+                  width: 0,
+                  position: "absolute",
+                  zIndex: -22,
+                  transition: "1s ease ",
+                  overflow: "hidden",
+                }
           }
         >
           <Sidebar />
@@ -56,7 +63,7 @@ const MainLayout = ({ children }) => {
           style={{
             flex: "1",
             padding: "20px",
-            minHeight:"80vh",   
+            minHeight: "80vh",
             height: "auto",
           }}
         >
