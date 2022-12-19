@@ -7,11 +7,18 @@ import TopMenuBar from "./TopMenu/TopMenuBar";
 const MainLayout = ({ children }) => {
   const { menuToggle } = useSelector((state) => state.CounterReducers);
   const dispatch = useDispatch();
+  
+
   useEffect(() => {
-    if (window?.innerWidth < 800) {
-      dispatch({ type: "TOGGLE_BAR" });
-    }
-  }, [dispatch]);
+    window.addEventListener('resize', ()=>{
+      if(window.innerWidth<500){
+        dispatch({ type: "TOGGLE_AUTO" })
+      }else{
+        dispatch({type:"TOGGLE_CLOSE"})
+      }
+    });
+   
+  }, [])
 
   return (
     <div

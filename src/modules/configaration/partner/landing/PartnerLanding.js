@@ -6,7 +6,7 @@ import PartnerForm from "../form/PartnerForm";
 import JsButton from "../../../../common/JsButton";
 const PartnerLanding = () => {
   const [show, setShow] = useState(false);
-  const { handleSubmit, handleChange, values } = useFormik({
+  const { handleSubmit, handleChange } = useFormik({
     initialValues: { name: "", phone: "" },
     enableReinitialize: true,
     onSubmit: (values) => {

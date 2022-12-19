@@ -24,6 +24,16 @@ const CounterReducers=(state=initialValues,action)=>{
             ...state,
             menuToggle:!state.menuToggle
         }
+        case "TOGGLE_AUTO":
+        return {
+            ...state,
+            menuToggle:false
+        }
+        case "TOGGLE_CLOSE":
+        return {
+            ...state,
+            menuToggle:true
+        }
     }
 
 }
