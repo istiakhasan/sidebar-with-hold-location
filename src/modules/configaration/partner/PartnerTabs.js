@@ -20,7 +20,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={"div"}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -55,7 +55,7 @@ const PartnerTabs = () => {
       >
         <Tab
           className="text-white"
-          label={<Typography component={'span'} style={{color:"black",fontSize:"11px"}}>Partner List</Typography>}
+          label={<Typography  style={{color:"black",fontSize:"11px"}}>Partner List</Typography>}
           {...a11yProps(0)}
         />
       </Tabs>

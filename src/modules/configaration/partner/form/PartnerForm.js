@@ -1,7 +1,9 @@
+import Select from "react-select";
 import React from "react";
 import JsFormInput from "../../../../common/JsFormInput";
+import customStyles from "../../../../common/customStyles";
 
-const PartnerForm = ({ handleChange }) => {
+const PartnerForm = ({ handleChange, values, setFieldValue }) => {
   return (
     <div className="global-wrappar-shadow">
       <div className="row p-0">
@@ -46,11 +48,24 @@ const PartnerForm = ({ handleChange }) => {
           />
         </div>
         <div className="col-md-3">
-          <JsFormInput
-            name="partherType"
+          <label style={{ fontSize: "12px", marginBottom: "px" }}>
+            Partner type
+          </label>
+
+          <Select
+            styles={customStyles}
+            name="partnerType"
+            options={[
+              { label: "Customer", value: 1 },
+              { label: "Supplier", value: 2 },
+              { label: "Both", value: 3 },
+            ]}
+            value={values.partnerType}
             placeholder="Partner type.."
             label={"Partner type"}
-            onChange={handleChange}
+            onChange={(valueOption) => {
+              setFieldValue("partnerType", valueOption);
+            }}
           />
         </div>
       </div>

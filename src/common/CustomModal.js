@@ -1,7 +1,7 @@
 import { Modal } from "react-bootstrap";
 import React from "react";
 
-const CustomModal = ({ children, show, setShow, title ,handleSubmit}) => {
+const CustomModal = ({ children, show, setShow, title, handleSubmit,isSubmitting }) => {
   const handleClose = () => setShow(false); //hide modal using  click in other side of the modal
 
   return (
@@ -23,7 +23,14 @@ const CustomModal = ({ children, show, setShow, title ,handleSubmit}) => {
             >
               <div className="d-flex mb-3  align-items-center justify-content-between">
                 <span>{title} </span>
-                <button type="submit" onClick={handleSubmit} className="btn btn-success btn-sm px-4">Save</button>
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className="btn btn-success btn-sm px-4"
+                >
+                  Save
+                </button>
               </div>
               <div style={{}}>{children}</div>
 

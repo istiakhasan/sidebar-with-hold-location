@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,15 +13,14 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {props?.tableheaders.map((headCell) => (
-          headCell.isActive? <TableCell
-          key={headCell.id}
-          sx={headCell.style}
-          align={headCell.numeric ? "left" : "left"}
-        >
-          {headCell.label}
-        </TableCell>:null
-         
+        {props?.tableheaders?.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            sx={headCell.style}
+            align={headCell.numeric ? "left" : "right"}
+          >
+            {headCell.label}
+          </TableCell>
         ))}
       </TableRow>
     </TableHead>
@@ -40,11 +38,10 @@ export default function CustomCommonTable({ tableheaders, children }) {
   };
 
   return (
-    <Box sx={{ width: "100%", padding: "0 18px" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <TableContainer sx={{ padding: "0 20px" }}>
-          <Table 
-          
+    <Box component={"div"} sx={{ width: "100%" }}>
+      <Paper component={"div"} sx={{ width: "100%", mb: 2 }}>
+        <TableContainer >
+          <Table
             sx={{ minWidth: 750, padding: "" }}
             aria-labelledby="tableTitle"
             // size={dense ? 'small' : 'medium'}
