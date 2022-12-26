@@ -59,12 +59,13 @@ const MainLayout = ({ children }) => {
           <Sidebar />
         </div>
         <div
-          className="custom-scroll"
+          className="custom-scroll right-side"
           style={{
             flex: "1",
             padding: "20px",
-            minHeight: "80vh",
+     
             height: "auto",
+      
           }}
         >
           {children}

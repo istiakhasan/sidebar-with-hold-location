@@ -38,11 +38,10 @@ export default function CustomCommonTable({ tableheaders, children }) {
   };
 
   return (
-    <Box component={"div"} sx={{ width: "100%" }}>
-      <Paper component={"div"} sx={{ width: "100%", mb: 2 }}>
+  
         <TableContainer >
           <Table
-            sx={{ minWidth: 750, padding: "" }}
+            sx={{ minWidth: 750,overflow:"scroll" }}
             aria-labelledby="tableTitle"
             // size={dense ? 'small' : 'medium'}
             size="small"
@@ -56,7 +55,6 @@ export default function CustomCommonTable({ tableheaders, children }) {
             <TableBody>{children}</TableBody>
           </Table>
         </TableContainer>
-      </Paper>
-    </Box>
+      
   );
 }

@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import CustomModal from "../../../../common/CustomModal";
 import PartnerForm from "../form/PartnerForm";
@@ -54,7 +54,7 @@ const PartnerLanding = () => {
         + Add Partner
       </JsButton>
 
-      {/* <PartnerListTable gridData={data?.data} /> */}
+      <PartnerListTable gridData={data?.data} />
 
       {/* add partner modal  */}
       <CustomModal

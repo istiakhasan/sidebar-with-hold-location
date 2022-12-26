@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import loginimg from "../asset/images/login/login.jpg";
 import JsButton from "../common/JsButton";
 import Jsinput from "../common/Jsinput";
@@ -12,6 +12,7 @@ import {
 import auth from "../firebase.config/firebase.config";
 import { useNavigate } from "react-router-dom";
 import Loading from "../common/loding";
+import { useDispatch } from "react-redux";
 
 let signUpValidation = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -28,7 +29,8 @@ let loginValidation = yup.object().shape({
 const Login = () => {
   // all use state  start
   const [isSignUp, setIsSignUp] = useState(false);
-
+  const [smallSize, setSmallSize] = useState(false);
+  const dispatch = useDispatch();
   // all use state end
   const navigate = useNavigate();
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -41,7 +43,16 @@ const Login = () => {
   ] = useCreateUserWithEmailAndPassword(auth);
 
   const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
-
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 1000) {
+        setSmallSize(true);
+      } else {
+        setSmallSize(false);
+      }
+    });
+  }, []);
+  console.log(smallSize, "small size");
   const { handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { mobileno: "", password: "", name: "", email: "" },
     validationSchema: isSignUp ? signUpValidation : loginValidation,
@@ -70,14 +81,12 @@ const Login = () => {
   }
 
   return (
-    <div className="min-vh-100  container-fluid ">
+    <div className="min-vh-100  container-fluid p-0">
       <div
-        className={`row ${
-          isSignUp ? "flex-row-reverse" : ""
-        }  component-background-color`}
+      style={{position:"relative",width:"100vh",overflow:"hidden"}}
+        className={`  component-background-color  p-0 m-0 vh-100 vw-100`}
       >
-        {/* <div className="row flex-row-reverse flex-lg-row component-background-color"> */}
-        <div className="col-lg-6 vh-100 p-0 d-none d-lg-block">
+        <div style={{width:"50%"}} className={` vh-100 p-0  ${isSignUp?"left-side-reverse":"left-side"}`}>
           <img
             style={{ objectFit: "cover" }}
             className="img-fluid h-100 w-100"
@@ -85,16 +94,23 @@ const Login = () => {
             alt=""
           />
         </div>
-        <div className="col-lg-6 vh-100  p-0 d-flex align-items-center justify-content-center">
+        <div
+          style={{
+           
+     
+          }}
+          className={` vh-100 w-50   p-0  d-flex align-items-center justify-content-center ${isSignUp?"right-side":"right-side-reverse"} `}
+        >
           <div
             style={{
               padding: " 40px",
               minHeight: "400px",
               height: "auto",
               width: "488px",
+              alignItems: "center",
               border: "3px solid #fcfefe",
             }}
-            className="d-flex align-items-center "
+            className={`d-flex align-items-center `}
           >
             <form className="w-100" onSubmit={handleSubmit}>
               <p

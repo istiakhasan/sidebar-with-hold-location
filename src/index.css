@@ -20,15 +20,80 @@ body {
   background-color: #fcfefe !important;
 }
 
-
-.common-background-color{
+.common-background-color {
   background: #fcfefe;
 }
-.component-background-color{
+.component-background-color {
   background: #eaf6f6;
+}
+.right-side {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  left: 25%; /* position the left edge of the element at the middle of the parent */
+  transform: translate(-50%, -50%);
+  transition: 0.5s ease-in-out all;
+}
+
+.right-side-reverse {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  left: 100%; /* position the left edge of the element at the middle of the parent */
+  transform: translate(-100%, -50%);
+  transition: 0.5s ease-in-out all;
+}
+.left-side {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  right: 50%; /* position the left edge of the element at the middle of the parent */
+  transform: translate(0, -50%);
+  transition: 0.5s ease-in-out all;
+}
+
+.left-side-reverse {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  right: 0; /* position the left edge of the element at the middle of the parent */
+  transform: translate(0%, -50%);
+  transition: 0.5s ease-in-out all;
+}
+
+.component-background-color {
+  position: relative;
+  transition: 2s ease-in-out all;
+  animation-name: example;
+  animation-duration: 4s;
+  transition: 0.2s linear all;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@media screen and (min-width: 1850px) {
+  .right-side-reverse {
+    position: absolute;
+    transition: left 0.5s, transform 0.5s 0.5s;
+    left: 950px;
+  }
+
+  .left-side-reverse {
+    position: absolute;
+    transition: right 0.5s, transform 0.5s 0.5s;
+    right: 970px;
+  }
+}
+
+.custom-login {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.5s ease-in-out all;
+}
+.custom-login2 {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  left: 100%; /* position the left edge of the element at the middle of the parent */
+  transform: translate(-100%, -50%);
+  transition: 0.5s ease-in-out all;
 }

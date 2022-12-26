@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { TableCell, TableRow } from "@mui/material";
 
 import CustomCommonTable from "../../../../common/CustomCommonTable";
+import MuiCommonIcon from "../../../../common/MuiCommonIcon";
 const PartnerListTable = ({ gridData }) => {
   const tableheaders = [
     {
@@ -46,6 +47,7 @@ const PartnerListTable = ({ gridData }) => {
       numeric: true,
       disablePadding: false,
       label: "Action",
+      style: { textAlign: "center" },
     },
   ];
 
@@ -66,18 +68,22 @@ const PartnerListTable = ({ gridData }) => {
       >
         {({ toPdf }) => <button onClick={toPdf}>Generate pdf</button>}
       </ReactToPdf> */}
-      <div ref={ref}>
+      <div className="custom-scroll" style={{ height: "500px" }} ref={ref}>
         <CustomCommonTable tableheaders={tableheaders}>
           {gridData.map((item, i) => (
             <TableRow key={i}>
-              <TableCell>{i}</TableCell>
+              <TableCell>{i + 1}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.mobile}</TableCell>
               <TableCell>{item.companyName}</TableCell>
               <TableCell>{item.email}</TableCell>
               <TableCell>{item?.partnerType?.label}</TableCell>
 
-              <TableCell>{item.action}</TableCell>
+              <TableCell sx={{ textAlign: "center" }}>
+                <span >
+                  <MuiCommonIcon name={"delete"} color="red" size="small" />
+                </span>
+              </TableCell>
             </TableRow>
           ))}
         </CustomCommonTable>
