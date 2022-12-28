@@ -55,12 +55,16 @@ const PartnerTabs = () => {
       >
         <Tab
           className="text-white"
-          label={<Typography  style={{color:"black",fontSize:"11px"}}>Partner List</Typography>}
+          label={
+            <Typography style={{ color: "black", fontSize: "11px" }}>
+              Partner List
+            </Typography>
+          }
           {...a11yProps(0)}
         />
       </Tabs>
 
-      <TabPanel key={value}  value={value} index={0}>
+      <TabPanel key={value} value={value} index={0}>
         <PartnerLanding />
       </TabPanel>
     </div>

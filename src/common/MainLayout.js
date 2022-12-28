@@ -9,6 +9,9 @@ const MainLayout = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (window.innerWidth < 700) {
+      dispatch({ type: "TOGGLE_AUTO" });
+    } 
     window.addEventListener("resize", () => {
       if (window.innerWidth < 700) {
         dispatch({ type: "TOGGLE_AUTO" });
@@ -16,7 +19,7 @@ const MainLayout = ({ children }) => {
         dispatch({ type: "TOGGLE_CLOSE" });
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <div
@@ -38,21 +41,21 @@ const MainLayout = ({ children }) => {
         <div
           id="sidebar-wrapper"
           style={
-            menuToggle
-              ? {
+            !menuToggle
+              ? 
+               {
+                  width: 0,
+                  position: "absolute",
+                  zIndex: -22,
+                  transition: "1s ease ",
+                  overflow: "hidden",
+                }:{
                   width: "250px",
                   transition: "1s ease ",
                   left: "0%",
                   overflow: "hidden",
                   position: "absolute",
                   zIndex: 222,
-                }
-              : {
-                  width: 0,
-                  position: "absolute",
-                  zIndex: -22,
-                  transition: "1s ease ",
-                  overflow: "hidden",
                 }
           }
         >

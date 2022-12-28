@@ -1,48 +1,28 @@
-import { useFormik } from "formik";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import CustomModal from "../../../../common/CustomModal";
 import PartnerForm from "../form/PartnerForm";
 import JsButton from "../../../../common/JsButton";
-import { createPartner } from "../../controllers";
 import PartnerListTable from "../table/PartnerListTable";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../../common/loding";
+import { useRef } from "react";
+
 const PartnerLanding = () => {
+  const saveRef = useRef();
+  const [show, setShow] = useState(false);
   const { isLoading, error, data, refetch } = useQuery(["partnerlist"], () =>
-    fetch("http://localhost:8080/api/v1/partner").then((res) => res.json())
+    fetch("https://mclone.onrender.com/api/v1/partner").then((res) => res.json())
   );
 
-  const [show, setShow] = useState(false);
-
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    setFieldValue,
-    resetForm,
-    isSubmitting,
-  } = useFormik({
-    initialValues: { name: "", phone: "" },
-    enableReinitialize: true,
-    onSubmit: (values) => {
-      createPartner(values, () => {
-        resetForm();
-        setShow(false);
-        refetch();
-        // getPartner(setGridData);
-      });
-    },
-  });
-
   if (isLoading) {
-    return;
+    return <Loading />;
   }
   if (error) {
-    return error;
+    return <Loading />;
   }
 
   return (
-    <div>
+    <form>
       <JsButton
         style={{
           position: "absolute",
@@ -54,25 +34,19 @@ const PartnerLanding = () => {
         + Add Partner
       </JsButton>
 
-      <PartnerListTable gridData={data?.data} />
+      <PartnerListTable refetch={refetch} gridData={data?.data} />
 
-      {/* add partner modal  */}
-      <CustomModal
-        handleSubmit={handleSubmit}
-        isSubmitting={isSubmitting}
-        setShow={setShow}
-        title={"Partner Create"}
-        show={show}
-      >
-        <PartnerForm
-          setFieldValue={setFieldValue}
-          values={values}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
+      {show && (
+        <CustomModal
           setShow={setShow}
-        />
-      </CustomModal>
-    </div>
+          title={"Partner Create"}
+          show={show}
+          saveRef={saveRef}
+        >
+          <PartnerForm refetch={refetch} setShow={setShow} saveRef={saveRef} />
+        </CustomModal>
+      )}
+    </form>
   );
 };
 

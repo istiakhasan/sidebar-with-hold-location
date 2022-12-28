@@ -26,7 +26,7 @@ body {
 .component-background-color {
   background: #eaf6f6;
 }
-.right-side {
+.login-wraper .right-side {
   position: absolute;
   top: 50%; /* position the top  edge of the element at the middle of the parent */
   left: 25%; /* position the left edge of the element at the middle of the parent */
@@ -70,18 +70,17 @@ code {
     monospace;
 }
 
-@media screen and (min-width: 1850px) {
-  .right-side-reverse {
-    position: absolute;
-    transition: left 0.5s, transform 0.5s 0.5s;
-    left: 950px;
+@media screen and (max-width: 767px) {
+  /* body{
+    background-color: red !important;
+  } */
+  
+}
+@media (min-width: 0) and (max-width: 650px) {
+  .right-side-container{
+    display: none;
   }
-
-  .left-side-reverse {
-    position: absolute;
-    transition: right 0.5s, transform 0.5s 0.5s;
-    right: 970px;
-  }
+ 
 }
 
 .custom-login {
@@ -96,4 +95,10 @@ code {
   left: 100%; /* position the left edge of the element at the middle of the parent */
   transform: translate(-100%, -50%);
   transition: 0.5s ease-in-out all;
+}
+/* confirm modal css */
+
+.confirm-class{
+  z-index: 100000 !important;
+ background: rgba(237, 233, 233, 0.6) !important;
 }

@@ -45,7 +45,8 @@ const Login = () => {
   const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
   useEffect(() => {
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 1000) {
+      console.log(window.innerWidth, "innter");
+      if (window.innerWidth < 750) {
         setSmallSize(true);
       } else {
         setSmallSize(false);
@@ -81,12 +82,17 @@ const Login = () => {
   }
 
   return (
-    <div className="min-vh-100  container-fluid p-0">
+    <div className="min-vh-100 login-wraper  container-fluid p-0">
       <div
-      style={{position:"relative",width:"100vh",overflow:"hidden"}}
+        style={{ position: "relative" }}
         className={`  component-background-color  p-0 m-0 vh-100 vw-100`}
       >
-        <div style={{width:"50%"}} className={` vh-100 p-0  ${isSignUp?"left-side-reverse":"left-side"}`}>
+        <div
+          style={{ width: "50%" }}
+          className={` vh-100 p-0 right-side-container  ${
+            !smallSize ? (isSignUp ? "left-side-reverse" : "left-side") : ""
+          }`}
+        >
           <img
             style={{ objectFit: "cover" }}
             className="img-fluid h-100 w-100"
@@ -95,11 +101,14 @@ const Login = () => {
           />
         </div>
         <div
-          style={{
-           
-     
-          }}
-          className={` vh-100 w-50   p-0  d-flex align-items-center justify-content-center ${isSignUp?"right-side":"right-side-reverse"} `}
+          style={{}}
+          className={` vh-100     p-0  d-flex align-items-center justify-content-center ${
+            smallSize
+              ? "w-100"
+              : isSignUp
+              ? "right-side w-50"
+              : "right-side-reverse w-50"
+          } `}
         >
           <div
             style={{

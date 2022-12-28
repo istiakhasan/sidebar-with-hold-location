@@ -6,6 +6,8 @@ import HelpIcon from "@mui/icons-material/Help";
 import SettingsIcon from "@mui/icons-material/Settings";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 const MuiCommonIcon = ({ name, size, color }) => {
   switch (name) {
     case "menu":
@@ -20,11 +22,20 @@ const MuiCommonIcon = ({ name, size, color }) => {
       return <SettingsIcon fontSize={size} sx={{ color: color }} />;
     case "feedback":
       return <FeedbackIcon fontSize={size} sx={{ color: color }} />;
+    case "edit":
+      return <BorderColorIcon fontSize={size} sx={{ color: color,fontSize:"17px" }} />;
     case "delete":
-      return <DeleteIcon fontSize={size} sx={{ color: color,fontSize:"17px" }} />;
+      return (
+        <DeleteIcon fontSize={size} sx={{ color: color, fontSize: "17px" }} />
+      );
 
     default:
-      break;
+      return (
+        <VisibilityIcon
+          fontSize={size}
+          sx={{ color: color, fontSize: "17px" }}
+        />
+      );
   }
 };
 

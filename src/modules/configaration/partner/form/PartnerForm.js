@@ -2,25 +2,45 @@ import Select from "react-select";
 import React from "react";
 import JsFormInput from "../../../../common/JsFormInput";
 import customStyles from "../../../../common/customStyles";
+import { useEffect } from "react";
+import usePartner from "../action/usePartner";
 
-const PartnerForm = ({ handleChange, values, setFieldValue }) => {
+const PartnerForm = ({ currentRowId,refetch,saveRef,setShow ,isView}) => {
+   
+  const {partnerGetById,formikProps}=usePartner(refetch,setShow,currentRowId)
+ 
+  useEffect(()=>{
+    if(currentRowId){
+      partnerGetById(currentRowId)
+    }
+  },[currentRowId])
+
+ 
+  const { handleSubmit, values, setFieldValue, handleChange } =
+  formikProps;
+  
   return (
     <div className="global-wrappar-shadow">
-      <div className="row p-0">
+      <form onSubmit={handleSubmit}  className="row p-0">
         <div className="col-md-3">
           <JsFormInput
             name="name"
+            value={values.name}
             placeholder="Name.."
             label={"Partner Name"}
             onChange={handleChange}
+            disabled={isView}
+       
           />
         </div>
         <div className="col-md-3">
           <JsFormInput
-            name="phone"
+            name="mobile"
             placeholder="Phone No.."
             label={"Mobile"}
             onChange={handleChange}
+            value={values.mobile}
+            disabled={isView}
           />
         </div>
         <div className="col-md-3">
@@ -29,6 +49,8 @@ const PartnerForm = ({ handleChange, values, setFieldValue }) => {
             placeholder="Address.."
             label={" Address"}
             onChange={handleChange}
+            value={values.address}
+            disabled={isView}
           />
         </div>
         <div className="col-md-3">
@@ -37,6 +59,8 @@ const PartnerForm = ({ handleChange, values, setFieldValue }) => {
             placeholder="Company.."
             label={"Company Name"}
             onChange={handleChange}
+            value={values.companyName}
+            disabled={isView}
           />
         </div>
         <div className="col-md-3">
@@ -45,6 +69,8 @@ const PartnerForm = ({ handleChange, values, setFieldValue }) => {
             placeholder="email.."
             label={" Email"}
             onChange={handleChange}
+            value={values.email}
+            disabled={isView}
           />
         </div>
         <div className="col-md-3">
@@ -55,6 +81,7 @@ const PartnerForm = ({ handleChange, values, setFieldValue }) => {
           <Select
             styles={customStyles}
             name="partnerType"
+            isDisabled={isView}
             options={[
               { label: "Customer", value: 1 },
               { label: "Supplier", value: 2 },
@@ -68,7 +95,9 @@ const PartnerForm = ({ handleChange, values, setFieldValue }) => {
             }}
           />
         </div>
-      </div>
+       
+        <button className="d-none"  ref={saveRef} type="submit">Submit</button>
+      </form>
     </div>
   );
 };

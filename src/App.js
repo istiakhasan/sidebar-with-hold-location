@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { routingList } from "./routinglist";
@@ -11,6 +11,7 @@ import MainLayout from "./common/MainLayout";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.config/firebase.config";
 import "./Common.style.css";
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
@@ -58,6 +59,7 @@ const App = () => {
           <Route path={"/example/:id/:type"} element={<Example />} />
         </Routes>
       </MainLayout>
+      <ToastContainer />
     </div>
   );
 };
