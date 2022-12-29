@@ -24,7 +24,7 @@ export const Sidebar = () => {
             data={sidebarData}
             setClick={setIsClick}
             index={index}
-            key={item.id}
+            key={index}
             item={item}
           />
         ))}

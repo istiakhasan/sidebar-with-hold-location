@@ -6,22 +6,24 @@ import { createPartner, updatePartner } from "../../controllers";
 
 const usePartner = (refetch, setShow, currentRowId) => {
   const [singleData, setSingleData] = useState({});
+  const [loading, setLoading] = useState(false);
   const formikProps = useFormik({
     initialValues: singleData ? singleData : { name: "", phone: "" },
     enableReinitialize: true,
     onSubmit: (values) => {
-      console.log(currentRowId, "row id current ");
+      setLoading(true);
       if (currentRowId) {
         updatePartner(values, currentRowId, () => {
           refetch();
           toast.success("Partner updated successfully...");
           setShow(false);
-       
+          setLoading(false);
         });
       } else {
         createPartner(values, () => {
-          setShow(false);
           refetch();
+          setShow(false);
+          setLoading(false);
         });
       }
     },
@@ -42,10 +44,12 @@ const usePartner = (refetch, setShow, currentRowId) => {
   };
   const partnerGetById = async (id, cb) => {
     try {
-      const res = await axios.get(`https://mclone.onrender.com/api/v1/partner/${id}`);
+      const res = await axios.get(
+        `https://mclone.onrender.com/api/v1/partner/${id}`
+      );
       if (res?.status === 200) {
         // toast.success("Successfully Deleted", { toastId: "deleteDue" });
-        console.log(res?.data?.data, "res.data");
+
         setSingleData(res?.data?.data);
       }
     } catch (error) {
@@ -55,7 +59,7 @@ const usePartner = (refetch, setShow, currentRowId) => {
   return {
     handleDeletePartner,
     formikProps,
-
+    loading,
     partnerGetById,
     singleData,
   };

@@ -18,7 +18,7 @@ const PurchaseReveive = () => {
 
   const handleClick = (item) => {
     const exist = data.find((itm) => itm.id === item.id);
-    console.log(exist, "exist");
+
     if (!exist) {
       setData([...data, item]);
     } else {

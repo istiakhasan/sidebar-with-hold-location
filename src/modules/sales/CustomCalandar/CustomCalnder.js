@@ -11,7 +11,7 @@ const CustomCalnder = () => {
   const [value, setValue] = useState(moment());
   const [allDayList, setAllDayList] = useState([]);
   const [monthValue, setMonthValue] = useState({});
-  console.log(value, "value");
+ 
   const attendance = {
     month: "November",
     data: [
@@ -69,12 +69,12 @@ const CustomCalnder = () => {
           )
         ),
       ];
-      console.log(previousMonthDays, "previous month days end ", end2);
+   
     } else {
       end = Number(moment(value).endOf("month").format("D"));
     }
 
-    console.log(end, "moment js");
+
     let AllDaysInMonth = [];
     for (let i = 1; i <= end; i++) {
       if (i < 10) {
@@ -89,7 +89,7 @@ const CustomCalnder = () => {
     }));
     setAllDayList(a3);
   }, [value, monthValue]);
-  console.log(allDayList, "all day list ");
+
 
   // const currentMonthName = () => {
   //   return value.format("MMMM");
@@ -122,11 +122,10 @@ const CustomCalnder = () => {
   //     : 35) -
   //   (Number(previousMonthDays.length || 0) + Number(allDayList.length || 0));
   const weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  console.log( moment().format('MMMM'), "moment montsh dot js");
+  
 
-  console.log(allDayList, "all day in month ");
+ 
 
-   console.log(attendance.month===moment().format('MMMM'),"check",moment().format('MMMM') ,"check ",attendance.month)
   return (
     <MainLayout>
       <div style={{ width: "300px" }}>

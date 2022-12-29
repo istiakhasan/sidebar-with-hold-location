@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayout from "./common/MainLayout";
+import ItemTab from "./modules/configaration/Item/ItemTab";
 import PartnerTabs from "./modules/configaration/partner/PartnerTabs";
 import PurchasePayment from "./modules/Purchase/purchasePayment/view/PurchasePayment";
 import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseReport";
@@ -76,5 +77,10 @@ export const routingList = [
     id: 8,
     path: "/configaration/partner",
     component: <PartnerTabs />,
+  },
+  {
+    id: 8,
+    path: "/configaration/item",
+    component: <ItemTab />,
   },
 ];

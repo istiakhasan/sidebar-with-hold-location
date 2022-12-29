@@ -45,7 +45,7 @@ const Login = () => {
   const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
   useEffect(() => {
     window.addEventListener("resize", () => {
-      console.log(window.innerWidth, "innter");
+    
       if (window.innerWidth < 750) {
         setSmallSize(true);
       } else {
@@ -53,7 +53,7 @@ const Login = () => {
       }
     });
   }, []);
-  console.log(smallSize, "small size");
+  
   const { handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { mobileno: "", password: "", name: "", email: "" },
     validationSchema: isSignUp ? signUpValidation : loginValidation,
@@ -77,7 +77,7 @@ const Login = () => {
     return <Loading />;
   }
   if (user) {
-    console.log(CreateUser, "users");
+   
     navigate("/");
   }
 

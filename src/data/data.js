@@ -6,37 +6,37 @@ export const sidebarData=[
         icon:"fa-solid fa-file-invoice",
         children:[
             {
-                id:2,
-                title:"Request",
+                id:32123432,
+                title:"Purchase Request",
                 path:"/purchase/request",
 
             },
             {
-                id:7,
+                id:71414,
                 title:"Purchase Order",
                 path:"/purchase/order",
 
             },
             {
-                id:3,
+                id:1343,
                 title:"Purchase Receive",
                 path:"/purchase/purchasereveive",
 
             },
             {
-                id:4,
+                id:414,
                 title:"Purchase Payment",
                 path:"/purchase/purchasepayment",
 
             },
             {
-                id:5,
+                id:1415,
                 title:"Purchase Return",
                 path:"/purchase/purchasereturn",
 
             },
             {
-                id:6,
+                id:55526,
                 title:"Purchase Report ",
                 path:"/purchase/purchaseReport",
 
@@ -373,7 +373,7 @@ export const sidebarData=[
             {
                 id:7,
                 title:"Item Profile",
-                path:"/configaration/partner",
+                path:"/configaration/item",
 
             },
             {

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import SecondLayer from "./SecondLayer";
 
 const SidebarChildNode = ({ item: element, index, click, setClick, data }) => {
+  const [secondClick, setSecondClick] = useState();
   useEffect(() => {
     const urlPath = window.location.pathname;
     const firstLayerTitle = urlPath.split("/")[1];
@@ -31,7 +32,7 @@ const SidebarChildNode = ({ item: element, index, click, setClick, data }) => {
             setClick(element.id);
           }
         }}
-        style={{ cursor: "pointer",whiteSpace:"nowrap" }}
+        style={{ cursor: "pointer", whiteSpace: "nowrap" }}
       >
         <i className={element.icon}></i>
         <span
@@ -49,7 +50,14 @@ const SidebarChildNode = ({ item: element, index, click, setClick, data }) => {
         }`}
       >
         {element?.children?.map((child, i) => (
-          <SecondLayer key={child.id} child={child} />
+          <SecondLayer
+            setSecondClick={setSecondClick}
+            secondClick={secondClick}
+            key={child.id}
+            index={index}
+            child={child}
+            data={element?.children}
+          />
         ))}
       </ul>
     </ul>

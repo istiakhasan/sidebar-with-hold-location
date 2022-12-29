@@ -74,13 +74,11 @@ code {
   /* body{
     background-color: red !important;
   } */
-  
 }
 @media (min-width: 0) and (max-width: 650px) {
-  .right-side-container{
+  .right-side-container {
     display: none;
   }
- 
 }
 
 .custom-login {
@@ -98,7 +96,53 @@ code {
 }
 /* confirm modal css */
 
-.confirm-class{
+.confirm-class {
   z-index: 100000 !important;
- background: rgba(237, 233, 233, 0.6) !important;
+  background: rgba(237, 233, 233, 0.6) !important;
+}
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif; */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+a {
+  font-family: "Montserrat", sans-serif;
+  
+}
+
+p,
+small,
+strong {
+  font-family: "Open Sans", sans-serif;
+ 
+}
+
+.nav.nav-tabs{
+  border: none;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active:hover{
+ 
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+  isolation:none !important; 
+  border-color: white !important;
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover
+
+.nav-tabs .nav-link{
+  border-color: none !important;
+}
+.nav-link{
+  color:white
+}
+.nav-item{
+  border:none;
 }

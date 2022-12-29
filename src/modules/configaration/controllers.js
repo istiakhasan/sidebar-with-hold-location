@@ -10,7 +10,7 @@ export const createPartner = async (values, cb) => {
     email: values.email,
     partnerType: values.partnerType,
   };
-
+console.log(payload,"payload")
   try {
     const res = await axios.post(
       `https://mclone.onrender.com/api/v1/partner`,
@@ -40,7 +40,7 @@ export const updatePartner = async (values, id, cb) => {
       payload
     );
     if (res?.data?.status === true) {
-      console.log("cb got it");
+    
       cb();
     }
   } catch (error) {

@@ -4,24 +4,46 @@ import JsFormInput from "../../../../common/JsFormInput";
 import customStyles from "../../../../common/customStyles";
 import { useEffect } from "react";
 import usePartner from "../action/usePartner";
+import Loading from "../../../../common/loding";
 
-const PartnerForm = ({ currentRowId,refetch,saveRef,setShow ,isView}) => {
-   
-  const {partnerGetById,formikProps}=usePartner(refetch,setShow,currentRowId)
- 
-  useEffect(()=>{
-    if(currentRowId){
-      partnerGetById(currentRowId)
+const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
+  const { partnerGetById, formikProps, loading } = usePartner(
+    refetch,
+    setShow,
+    currentRowId
+  );
+
+  useEffect(() => {
+    if (currentRowId) {
+      partnerGetById(currentRowId);
     }
-  },[currentRowId])
+  }, [currentRowId]);
 
- 
-  const { handleSubmit, values, setFieldValue, handleChange } =
-  formikProps;
-  
+  const { handleSubmit, values, setFieldValue, handleChange, isSubmitting } =
+    formikProps;
+  // if(!loading){
+  //   return <Loading />
+  // }
   return (
-    <div className="global-wrappar-shadow">
-      <form onSubmit={handleSubmit}  className="row p-0">
+    <div style={{ position: "relative" }} className="global-wrappar-shadow">
+  { loading &&   <div
+        style={{
+          position: "absolute",
+          background: "rgba(0,0,0,0.5)",
+          height: "100%",
+          width: "100%",
+          left: "0",
+          zIndex: "1000",
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"center",
+          borderRadius:"10px"
+          
+        }}
+      >
+        <div style={{color:"red",fontWeight:"bold"}}>Loading</div>
+      </div>}
+      <form onSubmit={handleSubmit} className="row p-0">
         <div className="col-md-3">
           <JsFormInput
             name="name"
@@ -30,7 +52,6 @@ const PartnerForm = ({ currentRowId,refetch,saveRef,setShow ,isView}) => {
             label={"Partner Name"}
             onChange={handleChange}
             disabled={isView}
-       
           />
         </div>
         <div className="col-md-3">
@@ -95,8 +116,15 @@ const PartnerForm = ({ currentRowId,refetch,saveRef,setShow ,isView}) => {
             }}
           />
         </div>
-       
-        <button className="d-none"  ref={saveRef} type="submit">Submit</button>
+
+        <button
+          className="d-none"
+          disabled={isSubmitting}
+          ref={saveRef}
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
