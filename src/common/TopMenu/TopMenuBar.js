@@ -19,10 +19,10 @@ const TopMenuBar = () => {
       >
         <span
           onClick={() => dispatch({ type: "TOGGLE_BAR" })}
-          className="d-flex justify-content-between align-items-center d-inline-block h-100 ms-3"
+          className="d-flex justify-content-between align-items-center d-inline-block h-100 ms-4 toggleIconWrapper"
         >
           {!menuToggle ? (
-            <MuiCommonIcon name="menu" size="large" />
+            <MuiCommonIcon  name="menu" size="large" />
           ) : (
             <MuiCommonIcon name="cancel" size="large" />
           )}
@@ -39,8 +39,8 @@ const TopMenuBar = () => {
             borderRadius: "50%",
             marginRight: "50px",
             cursor: "pointer",
-            border: "3px solid #66bfbf",
-            padding: "2px",
+            border: "2px solid white",
+            padding: "4px",
           }}
           className="img-fluid"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRctBcqMcFNJLixeaxBbPovatcYynLgmda33w&usqp=CAU"

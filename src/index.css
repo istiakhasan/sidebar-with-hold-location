@@ -164,6 +164,15 @@ color: black !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
+ 
+}
+.toggleIconWrapper{
+  color:var(--primarybg);
+  font-size: 11px;
+
+}
+.toggleIconWrapper:hover{
+  color: white;
 }
 /* ============================================================================sidebar========================================== */
 
