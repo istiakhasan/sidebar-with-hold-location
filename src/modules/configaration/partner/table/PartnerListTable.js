@@ -79,7 +79,7 @@ const PartnerListTable = ({ gridData, refetch }) => {
         {({ toPdf }) => <button onClick={toPdf}>Generate pdf</button>}
       </ReactToPdf> */}
       {/* <ConfirmAlert /> */}
-      <div className="custom-scroll" style={{ height: "500px" }} ref={ref}>
+      <div className="custom-scroll" style={{maxHeight:"600px"}}  ref={ref}>
         <CustomCommonTable tableheaders={tableheaders}>
           {gridData.map((item, i) => (
             <TableRow key={i}>

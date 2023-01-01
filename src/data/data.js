@@ -166,7 +166,7 @@ export const sidebarData=[
         id:4,
         title:"HR",
         path:"purchase",
-        icon:"fa-solid fa-file",
+        icon:"fa-solid fa-user-tie",
         children:[
             {
                 id:2,
@@ -355,14 +355,14 @@ export const sidebarData=[
         id:8,
         title:"Approval",
         path:"purchase",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-solid fa-clipboard-check",
         children:[]
     },
     {
         id:9,
         title:"Configuration",
         path:"purchase",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-sharp fa-solid fa-gear",
         children:[
             {
                 id:2,
@@ -451,7 +451,7 @@ export const sidebarData=[
         id:10,
         title:"CRM",
         path:"CRM",
-        icon:"fa-solid fa-bag-shopping",
+        icon:"fa-sharp fa-solid fa-gear",
         children:[
             {
                 id:2,

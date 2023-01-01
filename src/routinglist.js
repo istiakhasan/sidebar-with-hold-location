@@ -7,6 +7,7 @@ import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseRepor
 import PurchaseReturn from "./modules/Purchase/purchasereturn/view/PurchaseReturn";
 
 import PurchaseReveive from "./modules/Purchase/purchasereveive/view";
+import PurchaseRequestTabs from "./modules/Purchase/request/PurchaseRequestTabs";
 import CustomCalnder from "./modules/sales/CustomCalandar/CustomCalnder";
 import FormikYup from "./modules/sales/FormikYup/FormikYup";
 import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
@@ -26,7 +27,7 @@ export const routingList = [
   {
     id: 1,
     path: "/purchase/request",
-    component: <PurchaseRequest />,
+    component: <PurchaseRequestTabs />,
   },
   {
     id: 2,

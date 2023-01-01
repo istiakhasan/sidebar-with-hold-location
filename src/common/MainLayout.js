@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
   useEffect(() => {
     if (window.innerWidth < 700) {
       dispatch({ type: "TOGGLE_AUTO" });
-    } 
+    }
     window.addEventListener("resize", () => {
       if (window.innerWidth < 700) {
         dispatch({ type: "TOGGLE_AUTO" });
@@ -42,14 +42,14 @@ const MainLayout = ({ children }) => {
           id="sidebar-wrapper"
           style={
             !menuToggle
-              ? 
-               {
+              ? {
                   width: 0,
                   position: "absolute",
                   zIndex: -22,
                   transition: "1s ease ",
                   overflow: "hidden",
-                }:{
+                }
+              : {
                   width: "250px",
                   transition: "1s ease ",
                   left: "0%",
@@ -65,10 +65,9 @@ const MainLayout = ({ children }) => {
           className="custom-scroll right-side"
           style={{
             flex: "1",
-            padding: "20px",
-     
+            padding: "0 20px",
+
             height: "auto",
-      
           }}
         >
           {children}

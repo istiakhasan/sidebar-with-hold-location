@@ -6,17 +6,7 @@ import SidebarChildNode from "./SidebarChildNode";
 export const Sidebar = () => {
   const [click, setIsClick] = useState();
   return (
-    <div
-      className="custom-scroll"
-      style={{
-        background: "#eaf6f6",
-        padding:"10px 4px",
-        height: "90vh",
-
-        overflow: "scroll",
-        bottom: 0,
-      }}
-    >
+    <div className="custom-scroll sidebar-container-scroll">
       <div>
         {sidebarData.map((item, index) => (
           <SidebarChildNode

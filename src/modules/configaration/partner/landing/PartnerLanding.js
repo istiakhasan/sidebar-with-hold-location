@@ -26,7 +26,7 @@ const PartnerLanding = () => {
       <JsButton
         style={{
           position: "absolute",
-          top: "20px",
+          top: "0",
           right: "0px",
         }}
         onClick={() => setShow(true)}

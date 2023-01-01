@@ -34,7 +34,9 @@ const SidebarChildNode = ({ item: element, index, click, setClick, data }) => {
         }}
         style={{ cursor: "pointer", whiteSpace: "nowrap" }}
       >
-        <i className={element.icon}></i>
+        <span className={`${
+            isMatch === element.title && "ismatch"
+          }`}><i  className={element.icon}></i></span>
         <span
           className={`first-level-title ${
             isMatch === element.title && "ismatch"
