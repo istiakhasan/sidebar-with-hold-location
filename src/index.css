@@ -19,8 +19,9 @@ backgroundcolor2=#f76b8a
 :root {
   --primarybg: #ffffff;
   --secondary: #b6eb7a;
-  --main: #17706e;
+  --main: rgb(23, 110, 109);
   --mainButton: #fb7813;
+  --componentbg:rgba(23, 110, 109,.1);
 }
 body {
   /* background-color: #fcfefe !important;1st style */
@@ -32,7 +33,9 @@ body {
   background: var(--main);
 }
 .component-background-color {
-  background: #be79df;
+  background: var(--componentbg);
+  border-radius: 8px;
+  padding: 15px;
 }
 .login-wraper .right-side {
   position: absolute;
@@ -129,7 +132,7 @@ strong {
 }
 
 /* navlink customize  */
-.nav-tabs .nav-item.show .nav-link,
+/* .nav-tabs .nav-item.show .nav-link, */
 .nav-tabs .nav-link.active {
   border: none;
   color: var(--main)!important;

@@ -8,8 +8,7 @@ const PartnerTabs = () => {
     <div style={{ position: "relative" }} className=" ">
       <Tabs
         defaultActiveKey="partnerlist"
-        id="justify-tab-example"
-        className="mb-3"
+     
       >
         <Tab eventKey="partnerlist" title="Partner List">
           <PartnerLanding />{" "}

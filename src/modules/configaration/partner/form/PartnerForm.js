@@ -25,7 +25,7 @@ const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
   //   return <Loading />
   // }
   return (
-    <div style={{ position: "relative" }} className="global-wrappar-shadow">
+    <div style={{ position: "relative" }} className="component-background-color">
   { loading &&   <div
         style={{
           position: "absolute",

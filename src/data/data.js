@@ -407,6 +407,12 @@ export const sidebarData=[
 
             },
             {
+                id:78,
+                title:"office",
+                path:"/configaration/office",
+
+            },
+            {
                 id:8,
                 title:"Barcode",
                 path:"purchase",
