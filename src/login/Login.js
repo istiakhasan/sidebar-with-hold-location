@@ -70,9 +70,9 @@ const Login = () => {
       }
     },
   });
-  if (error || signUperror || updateerror) {
-    return;
-  }
+  // if (error || signUperror || updateerror) {
+  //   return;
+  // }
   if (loading || signUploading || updating) {
     return <Loading />;
   }

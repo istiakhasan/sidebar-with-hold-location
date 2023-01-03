@@ -6,12 +6,15 @@ import PartnerListTable from "../table/PartnerListTable";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../common/loding";
 import { useRef } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../firebase.config/firebase.config";
 
 const PartnerLanding = () => {
   const saveRef = useRef();
   const [show, setShow] = useState(false);
+  const [user]=useAuthState(auth)
   const { isLoading, error, data, refetch } = useQuery(["partnerlist"], () =>
-    fetch("https://mclone.onrender.com/api/v1/partner").then((res) => res.json())
+    fetch(`http://localhost:8080/api/v1/partner?email=${user?.email}`).then((res) => res.json())
   );
 
   if (isLoading) {

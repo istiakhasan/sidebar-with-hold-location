@@ -32,7 +32,7 @@ const MainLayout = ({ children }) => {
       <div
         style={{
           width: "100%",
-          height: "10vh",
+         
         }}
       >
         <TopMenuBar />
@@ -65,7 +65,7 @@ const MainLayout = ({ children }) => {
           className="custom-scroll right-side"
           style={{
             flex: "1",
-            padding: "0 20px",
+            padding: "5px 20px",
 
             height: "auto",
           }}

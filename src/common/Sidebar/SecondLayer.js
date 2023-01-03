@@ -32,7 +32,7 @@ const SecondLayer = ({ child, index, secondClick, setSecondClick, data }) => {
     >
       <i
         style={{ fontSize: "6px", marginRight: "12px" }}
-        class="fa-solid fa-circle"
+        className="fa-solid fa-circle"
       ></i>
       <Link
         className={`${secondClick === child?.id ? "ismatch" : ""}`}

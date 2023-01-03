@@ -12,9 +12,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.config/firebase.config";
 import "./Common.style.css";
 import { ToastContainer } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import fetchBranches from "./redux/thunk/fetchBranches";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
+  const dispatch=useDispatch()
   useEffect(() => {
     document?.addEventListener("keyup", (e) => {
       if (
@@ -29,7 +32,9 @@ const App = () => {
         }
       }
     });
-  }, []);
+    dispatch(fetchBranches(user?.email))
+
+  }, [user?.email,dispatch]);
   if (loading) {
     return <Loading />;
   }
@@ -40,6 +45,7 @@ const App = () => {
       </Routes>
     );
   }
+ 
   return (
     <div className="container-fluid m-0 p-0 ">
       {/* <TopMenuBar /> */}
