@@ -12,17 +12,15 @@ import actionType from "../../redux/actionTypes/actionTypes";
 const TopMenuBar = () => {
   const { menuToggle } = useSelector((state) => state.CounterReducers);
   const [user] = useAuthState(auth);
-  const { branch,selectedBranch } = useSelector((state) => state.authReducer);
+  const { branch, selectedBranch } = useSelector((state) => state.authReducer);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  useEffect(() => {
-    dispatch(fetchBranches(user?.email));
-  }, [dispatch, user?.email]);
- 
+
+
   return (
     <>
       <div className="navbar navbar-wraper">
@@ -40,7 +38,13 @@ const TopMenuBar = () => {
           <div style={{ width: "170px", marginRight: "10px" }}>
             <Select
               value={selectedBranch}
-              onChange={(valueOption) => {dispatch({type:actionType.SELECT_BRANCH,payload:valueOption})}}
+              onChange={(valueOption) => {
+                dispatch({
+                  type: actionType.SELECT_BRANCH,
+                  payload: valueOption,
+                });
+                localStorage.setItem("selectedBranch",JSON.stringify(valueOption))
+              }}
               options={branch}
               className=" w-100"
               styles={customStyles}

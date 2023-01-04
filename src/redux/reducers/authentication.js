@@ -3,7 +3,8 @@ import actionType from "../actionTypes/actionTypes";
 const initialState={
     value:0,
     branch:[],
-    selectedBranch:{}
+    selectedBranch:{},
+    district:[]
 }
 
 
@@ -20,6 +21,12 @@ switch (action.type) {
        return {
         ...state,
         selectedBranch:action.payload
+       }
+    case actionType.LOAD_DISTRICT:
+        
+       return {
+        ...state,
+        district:action.payload
        }
 
     default:

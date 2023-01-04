@@ -14,10 +14,12 @@ import "./Common.style.css";
 import { ToastContainer } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import fetchBranches from "./redux/thunk/fetchBranches";
+import fetchDistrict from "./redux/thunk/fetchDistricts";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
   const dispatch=useDispatch()
+
   useEffect(() => {
     document?.addEventListener("keyup", (e) => {
       if (
@@ -33,6 +35,7 @@ const App = () => {
       }
     });
     dispatch(fetchBranches(user?.email))
+    dispatch(fetchDistrict())
 
   }, [user?.email,dispatch]);
   if (loading) {
