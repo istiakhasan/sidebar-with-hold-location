@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
-import { sidebarData } from "../../data/data";
 
 const SecondLayer = ({ child, index, secondClick, setSecondClick, data }) => {
   // const [click, setClick] = useState("");

@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import fetchBranches from "./redux/thunk/fetchBranches";
 import fetchDistrict from "./redux/thunk/fetchDistricts";
+import fetchRoute from "./redux/thunk/fetchRoute";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
@@ -36,6 +37,7 @@ const App = () => {
     });
     dispatch(fetchBranches(user?.email))
     dispatch(fetchDistrict())
+    dispatch(fetchRoute())
 
   }, [user?.email,dispatch]);
   if (loading) {

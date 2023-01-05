@@ -4,7 +4,8 @@ const initialState={
     value:0,
     branch:[],
     selectedBranch:{},
-    district:[]
+    district:[],
+    routelist:[]
 }
 
 
@@ -27,6 +28,12 @@ switch (action.type) {
        return {
         ...state,
         district:action.payload
+       }
+    case actionType.LOAD_ROUTES:
+        
+       return {
+        ...state,
+        routelist:action.payload
        }
 
     default:

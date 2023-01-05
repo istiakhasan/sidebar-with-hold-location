@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import JsFormInput from "../../../../common/JsFormInput";
 import Select from "react-select";
 import customStyles from "../../../../common/customStyles";
 import JsButton from "../../../../common/JsButton";
 import useOffice from "../action/useOffice";
 import { useSelector } from "react-redux";
+import AsyncSelect from 'react-select/async';
+
 
 const OfficeCreateForm = () => {
   const { formikProps } = useOffice();
   const { values, handleChange } = formikProps;
-  const {branch}=useSelector(state=>state.authReducer)
+  const { branch, district } = useSelector(state => state.authReducer)
+  
+  const filterColors = (inputValue) => {
+    return district.filter((i) =>
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+  const loadOptions = (
+    inputValue,
+    cb
+  ) => {
+    if (inputValue?.length < 3) return [];
+    setTimeout(() => {
+      cb(filterColors(inputValue));
+    }, 1000);
+  };
+ 
   return (
     <form onSubmit={formikProps.handleSubmit}>
       <JsButton
@@ -19,7 +37,7 @@ const OfficeCreateForm = () => {
           top: "0",
           right: "0px",
         }}
-        // onClick={() => setShow(true)}
+      // onClick={() => setShow(true)}
       >
         {/* + Create Office */}
         Save
@@ -75,11 +93,14 @@ const OfficeCreateForm = () => {
         </div>
         <div className="col-md-3">
           <label style={{ fontSize: "13px" }}>District</label>
-          <Select
+          {/* <Select
             value={values.district}
+            options={district}
             name="district"
             styles={customStyles}
-          />
+            onChange={(valueOption)=>formikProps.setFieldValue("district",valueOption)}
+          /> */}
+          <AsyncSelect cacheOptions styles={customStyles} onChange={(valueOption)=>formikProps.setFieldValue("district",valueOption)} value={values.district} loadOptions={loadOptions} defaultOptions />
         </div>
       </div>
     </form>
