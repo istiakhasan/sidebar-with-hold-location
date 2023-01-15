@@ -23,7 +23,7 @@ const usePartner = (refetch, setShow, currentRowId) => {
           setLoading(false);
         });
       } else {
-        createPartner(values,user?.email, () => {
+        createPartner(values,user?.email,setLoading, () => {
           refetch();
           setShow(false);
           setLoading(false);

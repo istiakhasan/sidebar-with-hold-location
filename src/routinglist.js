@@ -1,8 +1,8 @@
 import React from "react";
-import MainLayout from "./common/MainLayout";
 import ItemTab from "./modules/configaration/Item/ItemTab";
 import OfficeTabs from "./modules/configaration/office/OfficeTabs";
 import PartnerTabs from "./modules/configaration/partner/PartnerTabs";
+import PurchaseOrderTabs from "./modules/Purchase/purchaseorder/PurchaseOrderTabs";
 import PurchasePayment from "./modules/Purchase/purchasePayment/view/PurchasePayment";
 import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseReport";
 import PurchaseReturn from "./modules/Purchase/purchasereturn/view/PurchaseReturn";
@@ -16,9 +16,7 @@ import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
 const PurchaseRequest = React.lazy(() =>
   import("./modules/Purchase/request/view/PurchaseRequest")
 );
-const PurchaseOrder = React.lazy(() =>
-  import("./modules/Purchase/purchaseorder/view/PurchaseOrder")
-);
+
 const HomeView = React.lazy(() => import("./modules/Home/View/HomeView"));
 // const PurchasePayment = React.lazy(() =>
 //   import("./modules/Purchase/purchasePayment/view/PurchasePayment")
@@ -38,7 +36,7 @@ export const routingList = [
   {
     id: 3,
     path: "/purchase/order",
-    component: <PurchaseOrder />,
+    component: <PurchaseOrderTabs />,
   },
   {
     id: 4,

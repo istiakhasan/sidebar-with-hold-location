@@ -119,7 +119,7 @@ const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
 
         <button
           className="d-none"
-          disabled={isSubmitting}
+          // disabled={isSubmitting}
           ref={saveRef}
           type="submit"
         >

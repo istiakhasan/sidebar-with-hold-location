@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const createPartner = async (values,userEmail, cb) => {
+export const createPartner = async (values,userEmail,setLoading, cb) => {
   const payload = {
     name: values.name,
     mobile: values.mobile,
@@ -12,7 +12,7 @@ export const createPartner = async (values,userEmail, cb) => {
     accountOwnerEmail:userEmail
 
   };
-console.log(payload,"payload")
+
   try {
     const res = await axios.post(
       // `https://mclone.onrender.com/api/v1/partner`,
@@ -22,9 +22,9 @@ console.log(payload,"payload")
     if (res?.data?.status === true) {
       cb();
     }
-    console.log(res);
+   
   } catch (error) {
-    
+    setLoading(false)
     toast.error(error.message);
   }
 };
