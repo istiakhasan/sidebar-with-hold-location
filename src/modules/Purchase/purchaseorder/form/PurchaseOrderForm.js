@@ -8,8 +8,9 @@ import Jsinput from "../../../../common/JsFormInput";
 import customStyles from "../../../../common/customStyles";
 import auth from "../../../../firebase.config/firebase.config";
 import JsButton from "../../../../common/JsButton";
-import MuiCommonIcon from './../../../../common/MuiCommonIcon';
-import JsFormInput from './../../../../common/JsFormInput';
+import MuiCommonIcon from "./../../../../common/MuiCommonIcon";
+import JsFormInput from "./../../../../common/JsFormInput";
+import moment from "moment/moment";
 const PurchaseOrderForm = () => {
   const [user, loading] = useAuthState(auth);
   const [supplierList, setSupplierList] = useState([]);
@@ -63,8 +64,6 @@ const PurchaseOrderForm = () => {
   }, [selectedBranch, user?.email]);
 
   const handleRowDto = (value) => {
-    console.log(value, "values");
-
     const isAlreadyExist = rowDto?.find(
       (itm) => itm?.item?.value === value?.item?.value
     );
@@ -81,7 +80,23 @@ const PurchaseOrderForm = () => {
     //   setRowDto(...rowDto,option)
     //  }
   };
+
   console.log(rowDto, "row data check ");
+
+  const calculateTotal = (value, index, price, quantity, data, setter) => {
+    console.log(value, index, price, quantity, data);
+    const priceWithOutDiscount = price * quantity;
+    const discount = (value * priceWithOutDiscount) / 100;
+    const totalPrice = priceWithOutDiscount - discount;
+    const _data = [...data];
+    _data[index].discountInTk = discount;
+    _data[index].discount = value;
+    _data[index].quantity = quantity;
+    _data[index].total = totalPrice;
+    setter(_data);
+  
+  };
+ console.log(moment().format("YYYY-MM-DD") );
   return (
     <form>
       <div
@@ -145,21 +160,61 @@ const PurchaseOrderForm = () => {
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Discount</th>
-                    <th  className="text-end">Total</th>
-                    <th style={{width:"100px"}}   className="text-end">Action</th>
+                    <th className="text-end">Total</th>
+                    <th style={{ width: "100px" }} className="text-end">
+                      Action
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {rowDto?.map((item, i) => (
                     <tr>
-                      <td>{i+1}</td>
+                      <td>{i + 1}</td>
                       <td>{item?.item?.itemName}</td>
                       <td>{item?.item?.purchasePrice}</td>
-                      <td style={{width:"100px"}}><JsFormInput /></td>
-                      <td style={{width:"100px"}}><JsFormInput /></td>
-                
-                      <td className="text-end" >120.00</td>
-                      <td style={{width:"100px"}} className="text-end"><MuiCommonIcon color={"red"} name={"delete"} /></td>
+                      <td style={{ width: "100px" }}>
+                        <JsFormInput
+                          onChange={(e) => {
+                          
+                            calculateTotal(
+                              item?.discount || 0,
+                              i,
+                              item?.item?.purchasePrice,
+                              e.target.value,
+                              rowDto,
+                              setRowDto
+                            );
+                          }}
+                        />
+                      </td>
+                      <td style={{ width: "100px" }}>
+                        <JsFormInput
+                          onChange={(e) => {
+                            calculateTotal(
+                              e.target.value,
+                              i,
+                              item?.item?.purchasePrice,
+                              item?.quantity || 0,
+                              rowDto,
+                              setRowDto
+                            );
+                          }}
+                        />
+                      </td>
+
+                      <td className="text-end">{item?.total}</td>
+                      <td style={{ width: "100px" }} className="text-end">
+                        <span
+                          onClick={() => {
+                            const filter = rowDto.filter(
+                              (dt) => dt.item?.value !== item?.item?.value
+                            );
+                            setRowDto(filter);
+                          }}
+                        >
+                          <MuiCommonIcon color={"red"} name={"delete"} />
+                        </span>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -171,36 +226,47 @@ const PurchaseOrderForm = () => {
           style={{ borderLeft: ".1px solid #C0C0C0 ", borderLeftWidth: ".2px" }}
           className="col-md-4 pe-5 ps-3"
         >
+         
           <span>Purchase Checkout</span>
-          <Jsinput type="date" label="Date" />
+          <Jsinput type="date"  value={moment().format("YYYY-MM-DD")  } label="Date" />
           <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
           >
             <span>Item Total</span>
-            <span style={{ fontWeight: "normal" }}>$00.00</span>
+            <span style={{ fontWeight: "normal" }}>
+              {rowDto?.reduce((pre, next) => +pre + (+next?.quantity || 0), 0)}
+            </span>
           </p>
           <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
           >
             <span>Item Price</span>
-            <span style={{ fontWeight: "normal" }}>$00.00</span>
+            <span style={{ fontWeight: "normal" }}>
+              {rowDto?.reduce((pre, next) => +pre + (+next?.total || 0), 0)}
+            </span>
           </p>
           <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
           >
-            <span>Net Discount</span>
-            <span style={{ fontWeight: "normal" }}>$00.00</span>
+            <span>Total Discount</span>
+            <span style={{ fontWeight: "normal" }}>
+              {rowDto?.reduce(
+                (pre, next) => (+pre || 0) + (+next?.discountInTk || 0),
+                0
+              )}
+              tk
+            </span>
           </p>
-          <p
+          {/* <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
           >
             <span> Discount</span>
             <span style={{ fontWeight: "normal" }}>$00.00</span>
-          </p>
+          </p> */}
           <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
