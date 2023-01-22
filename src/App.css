@@ -11,6 +11,14 @@
 .table-responsive table td {
   font-size: 12px;
   color: #5a5a55;
+  padding: 2px 4px !important;
+}
+.table-responsive table th {
+  font-size: 12px;
+   color: #5a5a55;
+   font-weight: bold;
+   padding: 0 4px !important;
+
 }
 .table-responsive table tr{
   border: .5px solid rgb(212, 206, 206) !important;

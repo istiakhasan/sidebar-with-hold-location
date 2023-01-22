@@ -11,6 +11,14 @@ import JsButton from "../../../../common/JsButton";
 import MuiCommonIcon from "./../../../../common/MuiCommonIcon";
 import JsFormInput from "./../../../../common/JsFormInput";
 import moment from "moment/moment";
+import {
+  calculateTotal,
+  getItemList,
+  getSupplierList,
+  handleRowDto,
+  handleSaveData,
+} from "../action/purchaseAction";
+import { toast } from "react-toastify";
 const PurchaseOrderForm = () => {
   const [user, loading] = useAuthState(auth);
   const [supplierList, setSupplierList] = useState([]);
@@ -24,81 +32,26 @@ const PurchaseOrderForm = () => {
       supplier: "",
       item: "",
     },
-  });
-
-  const filterColors = (inputValue) => {
-    return itemList.filter((i) =>
-      i.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
-  };
-  const loadOptions = (inputValue, cb) => {
-    if (inputValue?.length < 3) return [];
-    setTimeout(() => {
-      cb(filterColors(inputValue));
-    }, 1000);
-  };
-
-  useEffect(() => {
-    fetch(
-      `http://localhost:8080/api/v1/partner/partnerType/1?email=${user.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setSupplierList(data?.data));
-  }, []);
-
-  useEffect(() => {
-    fetch(
-      `http://localhost:8080/api/v1/product/?email=${user?.email}&branchId=${selectedBranch?.value}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const _itemList = data?.data?.map((item) => {
-          return {
-            ...item,
-            label: item.itemName,
-            value: item.itemCode,
-          };
-        });
-        setItemList(_itemList);
+    onSubmit: (values) => {
+      handleSaveData(rowDto,totalPrice, user?.email, selectedBranch?.value,values, (res) => {
+        if(res?.status){
+          toast.success("Checkout successfully")
+          setRowDto([])
+          formikProps.resetForm()
+        }
+        
       });
-  }, [selectedBranch, user?.email]);
+    },
+  });
+  const totalPrice=rowDto?.reduce((pre, next) => +pre + (+next?.total || 0), 0)
 
-  const handleRowDto = (value) => {
-    const isAlreadyExist = rowDto?.find(
-      (itm) => itm?.item?.value === value?.item?.value
-    );
-    if (isAlreadyExist) {
-      return alert("exist");
-    }
-    setRowDto([...rowDto, value]);
-
-    //   return
-    //  const found=rowDto.some(elemt=>elemt.value===option.value)
-    //  if(found){
-    //   alert("Item already exist .....")
-    //  }else{
-    //   setRowDto(...rowDto,option)
-    //  }
-  };
-
-  console.log(rowDto, "row data check ");
-
-  const calculateTotal = (value, index, price, quantity, data, setter) => {
-    console.log(value, index, price, quantity, data);
-    const priceWithOutDiscount = price * quantity;
-    const discount = (value * priceWithOutDiscount) / 100;
-    const totalPrice = priceWithOutDiscount - discount;
-    const _data = [...data];
-    _data[index].discountInTk = discount;
-    _data[index].discount = value;
-    _data[index].quantity = quantity;
-    _data[index].total = totalPrice;
-    setter(_data);
-  
-  };
- console.log(moment().format("YYYY-MM-DD") );
+  useEffect(() => {
+    getItemList(user, selectedBranch, setItemList);
+    getSupplierList(user, setSupplierList);
+  }, [selectedBranch, user?.email, user]);
+  console.log(rowDto,"row dto");
   return (
-    <form>
+    <form onSubmit={formikProps?.handleSubmit}>
       <div
         style={{ border: "1px solid #C0C0C0" }}
         className="row  m-0 p-0 py-3 rounded-2"
@@ -128,26 +81,14 @@ const PurchaseOrderForm = () => {
               options={itemList}
               onChange={(valueOption) => {
                 formikProps.setFieldValue("item", valueOption);
-                handleRowDto({ ...formikProps.values, item: valueOption });
+                handleRowDto(
+                  { ...formikProps.values, item: valueOption },
+                  rowDto,
+                  setRowDto
+                );
               }}
               value={formikProps.values.item}
             />
-            {/* <AsyncSelect
-              cacheOptions
-              styles={customStyles}
-              onChange={(valueOption) => {
-                formikProps.setFieldValue("item", valueOption);
-                handleRowDto(
-                  itemList,
-                  formikProps.values,
-                  setRowDto,
-                  rowDto
-                )
-              }}
-              value={formikProps.values.item}
-              loadOptions={loadOptions}
-              defaultOptions
-            /> */}
           </div>
 
           {rowDto.length > 0 && (
@@ -170,16 +111,15 @@ const PurchaseOrderForm = () => {
                   {rowDto?.map((item, i) => (
                     <tr>
                       <td>{i + 1}</td>
-                      <td>{item?.item?.itemName}</td>
-                      <td>{item?.item?.purchasePrice}</td>
+                      <td>{item?.itemName}</td>
+                      <td>{item?.purchasePrice}</td>
                       <td style={{ width: "100px" }}>
                         <JsFormInput
                           onChange={(e) => {
-                          
                             calculateTotal(
                               item?.discount || 0,
                               i,
-                              item?.item?.purchasePrice,
+                              item?.purchasePrice,
                               e.target.value,
                               rowDto,
                               setRowDto
@@ -193,7 +133,7 @@ const PurchaseOrderForm = () => {
                             calculateTotal(
                               e.target.value,
                               i,
-                              item?.item?.purchasePrice,
+                              item?.purchasePrice,
                               item?.quantity || 0,
                               rowDto,
                               setRowDto
@@ -207,7 +147,7 @@ const PurchaseOrderForm = () => {
                         <span
                           onClick={() => {
                             const filter = rowDto.filter(
-                              (dt) => dt.item?.value !== item?.item?.value
+                              (dt) => dt.value !== item?.value
                             );
                             setRowDto(filter);
                           }}
@@ -226,9 +166,12 @@ const PurchaseOrderForm = () => {
           style={{ borderLeft: ".1px solid #C0C0C0 ", borderLeftWidth: ".2px" }}
           className="col-md-4 pe-5 ps-3"
         >
-         
           <span>Purchase Checkout</span>
-          <Jsinput type="date"  value={moment().format("YYYY-MM-DD")  } label="Date" />
+          <Jsinput
+            type="date"
+            value={moment().format("YYYY-MM-DD")}
+            label="Date"
+          />
           <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
@@ -244,7 +187,8 @@ const PurchaseOrderForm = () => {
           >
             <span>Item Price</span>
             <span style={{ fontWeight: "normal" }}>
-              {rowDto?.reduce((pre, next) => +pre + (+next?.total || 0), 0)}
+              {/* {rowDto?.reduce((pre, next) => +pre + (+next?.total || 0), 0)} */}
+              {totalPrice}
             </span>
           </p>
           <p
@@ -260,13 +204,7 @@ const PurchaseOrderForm = () => {
               tk
             </span>
           </p>
-          {/* <p
-            style={{ fontSize: "14px" }}
-            className="d-flex align-items-center justify-content-between"
-          >
-            <span> Discount</span>
-            <span style={{ fontWeight: "normal" }}>$00.00</span>
-          </p> */}
+
           <p
             style={{ fontSize: "14px" }}
             className="d-flex align-items-center justify-content-between"
@@ -288,7 +226,9 @@ const PurchaseOrderForm = () => {
             <span>Advance Cash </span>
             <span style={{ fontWeight: "normal" }}>$00.00</span>
           </p>
-          <JsButton sx={{ width: "100%" }}>Checkout</JsButton>
+          <JsButton type="submit" sx={{ width: "100%" }}>
+            Checkout
+          </JsButton>
         </div>
       </div>
     </form>
