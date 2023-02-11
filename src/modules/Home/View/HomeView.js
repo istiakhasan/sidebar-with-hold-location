@@ -1,11 +1,11 @@
-import { Button } from "@mui/material";
 import React, { useRef } from "react";
 
-import { Formik } from "formik";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.config/firebase.config";
-import { signOut } from "firebase/auth";
-import Loading from "../../../common/loding";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import HomeCard from "./HomeCard";
+import ReactApexChart from "react-apexcharts";
+
 const HomeView = () => {
   const formRef = useRef();
 
@@ -31,14 +31,98 @@ const HomeView = () => {
     return;
   }
 
+  const state = {
+    series: [
+      {
+        name: "Servings",
+        data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 31, 87, 65, 35],
+      },
+    ],
+
+    options: {
+      annotations: {
+        points: [
+          {
+            x: "Bananas",
+            seriesIndex: 0,
+            label: {
+              borderColor: "#fffff",
+              offsetY: 0,
+              style: {
+                color: "#fff",
+                background: "#775DD0",
+              },
+              text: "Bananas are good",
+            },
+          },
+        ],
+      },
+      chart: {
+        height: 350,
+        type: "bar",
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 0,
+          columnWidth: "30%",
+        },
+      },
+
+      xaxis: {
+        labels: {
+          rotate: -45,
+        },
+        categories: [
+          "Apples",
+          "Oranges",
+          "Strawberries",
+          "Pineapples",
+          "Mangoes",
+          "Bananas",
+          "Blackberries",
+          "Pears",
+          "Watermelons",
+          "Cherries",
+          "Pomegranates",
+          "Tangerines",
+          "Papayas",
+        ],
+        tickPlacement: "on",
+      },
+      fill: {
+        colors: ["#176E6D", "#176E6D", "#176E6D"],
+      },
+    },
+  };
+
   return (
- 
-      <div className="global-wrappar-shadow">
-       
-      
-      
+    <div className="">
+      <div className="row">
+        <HomeCard title="New Accounts" percentage="234" total="58" />
+        <HomeCard title="Total Expenses" percentage="71" total="62" />
+        <HomeCard title="Company Value" percentage="$ 1,45M" total="72" />
+        <HomeCard title="New Employess" percentage="34 hires" total="81" />
       </div>
-    
+      <div className="row mt-5">
+        <div className="col-md-8">
+          <div className=" bar-chart-wraper">
+            <div id="chart">
+              <ReactApexChart
+                options={state.options}
+                series={state.series}
+                type="bar"
+                height={400}
+              />
+            </div>
+          </div>
+        </div>
+        <div style={{height:"auto"}} className="col-md-4 ">
+          <div  className="bar-chart-wraper ">
+
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
