@@ -10,8 +10,7 @@ import auth from "./../../../../firebase.config/firebase.config";
 import Loading from "./../../../../common/loding";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
-
-const PurchaseOrderLanding = () => {
+const PoApproveLanding = () => {
   const [user, loading] = useAuthState(auth);
   const [gridData, setGridData] = useState([]);
   const { selectedBranch } = useSelector((state) => state.authReducer);
@@ -60,6 +59,7 @@ const PurchaseOrderLanding = () => {
       style: { textAlign: "center" },
     },
   ];
+
   const getPurchaseOrderLanding = () => {
     fetch(
       `http://localhost:8080/api/v1/purchase?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`
@@ -74,6 +74,8 @@ const PurchaseOrderLanding = () => {
   if (loading) {
     return <Loading />;
   }
+  console.log(gridData, "grid data ");
+
   return (
     <div className="table-responsive mt-2">
       <div className="custom-scroll" style={{ maxHeight: "600px" }}>
@@ -88,26 +90,43 @@ const PurchaseOrderLanding = () => {
               <TableCell>{user?.displayName || ""}</TableCell>
               <TableCell>{item?.totalPrice || ""}(Tk)</TableCell>
               <TableCell>
-                {
-                  item?.status==="approved"?  <span
-                  style={{
-                    color: "green",
-                    fontWeight: "bold",
-                    fontSize: "11px",
-                  }}
-                >
-                  {item?.status}
-                </span>:<span
-                  style={{
-                    color: "goldenrod",
-                    fontWeight: "bold",
-                    fontSize: "11px",
-                  }}
-                >
-                  {item?.status}
-                </span>
-                }
-                
+                {item?.status === "approved" ? (
+                  <span
+                    style={{
+                      color: "green",
+                      fontWeight: "bold",
+                      fontSize: "11px",
+                    }}
+                  >
+                    {item?.status}
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      color: "goldenrod",
+                      fontWeight: "bold",
+                      fontSize: "11px",
+                    }}
+                    onClick={() => {
+                      console.log(
+                        `http://localhost:8080/api/v1/purchase/${item?._id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`,
+                        "url here "
+                      );
+                      fetch(
+                        `http://localhost:8080/api/v1/purchase/${item?._id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`,
+                        {
+                          method: "PATCH",
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((data) => {
+                          console.log(data, "data ");
+                        });
+                    }}
+                  >
+                    {item?.status}
+                  </span>
+                )}
               </TableCell>
 
               <TableCell sx={{ textAlign: "center" }}>
@@ -153,4 +172,4 @@ const PurchaseOrderLanding = () => {
   );
 };
 
-export default PurchaseOrderLanding;
+export default PoApproveLanding;

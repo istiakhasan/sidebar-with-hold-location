@@ -2,6 +2,7 @@ import React from "react";
 import ItemTab from "./modules/configaration/Item/ItemTab";
 import OfficeTabs from "./modules/configaration/office/OfficeTabs";
 import PartnerTabs from "./modules/configaration/partner/PartnerTabs";
+import PurchaseApproveTabs from "./modules/Purchase/purchaseapprove/PurchaseApproveTabs";
 import PurchaseOrderTabs from "./modules/Purchase/purchaseorder/PurchaseOrderTabs";
 import PurchasePayment from "./modules/Purchase/purchasePayment/view/PurchasePayment";
 import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseReport";
@@ -13,14 +14,10 @@ import CustomCalnder from "./modules/sales/CustomCalandar/CustomCalnder";
 import FormikYup from "./modules/sales/FormikYup/FormikYup";
 import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
 
-const PurchaseRequest = React.lazy(() =>
-  import("./modules/Purchase/request/view/PurchaseRequest")
-);
+
+
 
 const HomeView = React.lazy(() => import("./modules/Home/View/HomeView"));
-// const PurchasePayment = React.lazy(() =>
-//   import("./modules/Purchase/purchasePayment/view/PurchasePayment")
-// );
 
 export const routingList = [
   {
@@ -74,18 +71,23 @@ export const routingList = [
     component: <CustomCalnder />,
   },
   {
-    id: 8,
+    id: 9,
     path: "/configaration/partner",
     component: <PartnerTabs />,
   },
   {
-    id: 8,
+    id: 10,
     path: "/configaration/item",
     component: <ItemTab />,
   },
   {
-    id: 8,
+    id: 11,
     path: "/configaration/office",
     component: <OfficeTabs />,
   },
+  {
+    id:12,
+    path:"/purchase/approve",
+    component:<PurchaseApproveTabs />
+  }
 ];
