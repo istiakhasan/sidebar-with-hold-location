@@ -10,6 +10,7 @@ import auth from "./../../../../firebase.config/firebase.config";
 import Loading from "./../../../../common/loding";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
+import { toast } from "react-toastify";
 const PoApproveLanding = () => {
   const [user, loading] = useAuthState(auth);
   const [gridData, setGridData] = useState([]);
@@ -50,13 +51,14 @@ const PoApproveLanding = () => {
       numeric: true,
       disablePadding: false,
       label: "Status",
+      style:{textAlign:"end"}
     },
     {
       id: "12",
       numeric: true,
       disablePadding: false,
       label: "Action",
-      style: { textAlign: "center" },
+      style: { textAlign: "end" },
     },
   ];
 
@@ -89,7 +91,7 @@ const PoApproveLanding = () => {
               <TableCell>{item?.supplier?.label || ""}</TableCell>
               <TableCell>{user?.displayName || ""}</TableCell>
               <TableCell>{item?.totalPrice || ""}(Tk)</TableCell>
-              <TableCell>
+              <TableCell sx={{ textAlign: "end",maxWidth:"40px" }}>
                 {item?.status === "approved" ? (
                   <span
                     style={{
@@ -120,7 +122,8 @@ const PoApproveLanding = () => {
                       )
                         .then((res) => res.json())
                         .then((data) => {
-                          console.log(data, "data ");
+                          toast.success("Approved successfully...")
+                          getPurchaseOrderLanding();
                         });
                     }}
                   >
@@ -129,8 +132,8 @@ const PoApproveLanding = () => {
                 )}
               </TableCell>
 
-              <TableCell sx={{ textAlign: "center" }}>
-                <span className="d-flex justify-content-center">
+              <TableCell sx={{ textAlign: "end",maxWidth:"40px" }}>
+                <span className="">
                   <span
                     className="me-2 d-inline-block"
                     onClick={() => {

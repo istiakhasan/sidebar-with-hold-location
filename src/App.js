@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { routingList } from "./routinglist";
@@ -11,15 +11,16 @@ import MainLayout from "./common/MainLayout";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./firebase.config/firebase.config";
 import "./Common.style.css";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import fetchBranches from "./redux/thunk/fetchBranches";
 import fetchDistrict from "./redux/thunk/fetchDistricts";
 import fetchRoute from "./redux/thunk/fetchRoute";
+import { height } from "@mui/system";
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document?.addEventListener("keyup", (e) => {
@@ -35,11 +36,10 @@ const App = () => {
         }
       }
     });
-    dispatch(fetchBranches(user?.email))
-    dispatch(fetchDistrict())
-    dispatch(fetchRoute())
-
-  }, [user?.email,dispatch]);
+    dispatch(fetchBranches(user?.email));
+    dispatch(fetchDistrict());
+    dispatch(fetchRoute());
+  }, [user?.email, dispatch]);
   if (loading) {
     return <Loading />;
   }
@@ -50,7 +50,7 @@ const App = () => {
       </Routes>
     );
   }
- 
+
   return (
     <div className="container-fluid m-0 p-0 ">
       {/* <TopMenuBar /> */}
@@ -68,6 +68,14 @@ const App = () => {
             />
           ))}{" "}
           <Route path={"/example/:id/:type"} element={<Example />} />
+          <Route
+            path="*"
+            element={
+              <div style={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                <h1>404 not found</h1>
+              </div>
+            }
+          />
         </Routes>
       </MainLayout>
       <ToastContainer />

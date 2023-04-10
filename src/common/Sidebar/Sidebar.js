@@ -13,7 +13,7 @@ export const Sidebar = () => {
         {routelist?.map((item, index) => (
           <SidebarChildNode
             click={click}
-            data={sidebarData}
+            data={routelist}
             setClick={setIsClick}
             index={index}
             key={index}

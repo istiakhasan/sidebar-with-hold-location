@@ -32,7 +32,7 @@ const MainLayout = ({ children }) => {
       <div
         style={{
           width: "100%",
-         
+
         }}
       >
         <TopMenuBar />

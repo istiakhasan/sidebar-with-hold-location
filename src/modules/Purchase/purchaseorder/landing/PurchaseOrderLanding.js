@@ -10,6 +10,7 @@ import auth from "./../../../../firebase.config/firebase.config";
 import Loading from "./../../../../common/loding";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
+import { getPurchaseOrderLanding } from "../action/purchaseAction";
 
 const PurchaseOrderLanding = () => {
   const [user, loading] = useAuthState(auth);
@@ -60,15 +61,9 @@ const PurchaseOrderLanding = () => {
       style: { textAlign: "center" },
     },
   ];
-  const getPurchaseOrderLanding = () => {
-    fetch(
-      `http://localhost:8080/api/v1/purchase?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`
-    )
-      .then((res) => res.json())
-      .then((data) => setGridData(data?.data));
-  };
+
   useEffect(() => {
-    getPurchaseOrderLanding();
+    getPurchaseOrderLanding(user?.email,selectedBranch?.value,setGridData);
   }, [selectedBranch?.value, user?.email]);
 
   if (loading) {
@@ -107,7 +102,7 @@ const PurchaseOrderLanding = () => {
                   {item?.status}
                 </span>
                 }
-                
+
               </TableCell>
 
               <TableCell sx={{ textAlign: "center" }}>

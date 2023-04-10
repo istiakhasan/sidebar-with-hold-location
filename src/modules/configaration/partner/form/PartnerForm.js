@@ -38,7 +38,7 @@ const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
           alignItems:"center",
           justifyContent:"center",
           borderRadius:"10px"
-          
+
         }}
       >
         <div style={{color:"red",fontWeight:"bold"}}>Loading</div>
@@ -119,7 +119,6 @@ const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
 
         <button
           className="d-none"
-          // disabled={isSubmitting}
           ref={saveRef}
           type="submit"
         >

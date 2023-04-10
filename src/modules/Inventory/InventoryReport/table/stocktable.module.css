@@ -1,0 +1,27 @@
+.tablewraper {
+  max-height: 400px;
+  overflow: scroll;
+}
+.stock_table {
+  border: 1px solid #eaeaed;
+  border-radius: 5px;
+  /* overflow: hidden; */
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  padding: 10px;
+  table-layout: fixed;
+}
+
+.stock_table th,
+.stock_table td {
+  /* border: 1px solid ; */
+  font-size: 14px;
+}
+
+
+.stock_table th {
+  position: sticky;
+  top: 0;
+  background: #cecfd5;
+}

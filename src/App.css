@@ -17,7 +17,7 @@
   font-size: 12px;
    color: #5a5a55;
    font-weight: bold;
-   padding: 0 4px !important;
+   padding: 0 4px ;
 
 }
 .table-responsive table tr{
@@ -95,7 +95,7 @@
 }
 
 .submenu-wrapper {
-  
+
   border-radius: 2px;
   height: 100%;
   width: 100%;

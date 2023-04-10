@@ -1,100 +1,79 @@
-import { Switch, TableBody, TableCell, TableRow } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
+import HookFormInput from "../../../../common/HookFormInput";
+import { useForm } from "react-hook-form";
+import JsButton from "../../../../common/JsButton";
 import { useState } from "react";
-import CustomCommonTable from "../../../../common/CustomCommonTable";
-import MainLayout from "../../../../common/MainLayout";
 
 const PurchaseReport = () => {
-  const tableheaders = [
+  // const { register, handleSubmit } = useForm();
+  // const submitForm = (e) => {
+  //    e.preventDefault()
+
+  // };
+  // const [inputField, setInputField] = useState([{ name: "", number: "" }]);
+  // console.log(inputField);
+  const [hierarcyTree, sethierarcyTree] = useState([
     {
-      id: "89",
-      numeric: false,
-      disablePadding: true,
-      label: "SL",
-      isActive: true,
+      id: 1,
+      child: [
+        {
+          id: 2,
+          child: [],
+        },
+      ],
     },
-    {
-      id: "calories",
-      numeric: false,
-      disablePadding: false,
-      label: "Customer",
-      isActive: true,
-      showRow:true
-    },
-    {
-      id: "76",
-      numeric: true,
-      disablePadding: false,
-      label: "Invoice No",
-      isActive: true,
-    },
-    {
-      id: "16",
-      numeric: true,
-      disablePadding: false,
-      label: "Challan No",
-      isActive: true,
-    },
-    {
-      id: "13",
-      numeric: true,
-      disablePadding: false,
-      label: "Amount",
-      isActive: true,
-    },
-  ];
-  const [tableTh, setTableTh] = useState(tableheaders);
- 
- const [tableData,setTAbleData]=useState([
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
-  {id:1,customer:"xyx",invoice:"0211",challan:"0211",amount:"220",isActive:true},
- ])
- const handleChangeTable = (e, i) => {
-  if (!e.target.checked) {
-    const _data = [...tableTh];
-    const _tableData=[...tableData]
-    _data[i].isActive = false;
-    setTableTh(_data);
-  }else{
-    const _data = [...tableTh];
-    _data[i].isActive = true;
-    setTableTh(_data);
-  }
-};
+  ]);
+  const handleClick = () => {
+    const newObj = { id: Math.floor(100000 + Math.random() * 900000) };
+    sethierarcyTree([...hierarcyTree, newObj]);
+  };
+  useEffect(()=>{
+   const a= [0,1,2,3].indexOf(7)
+   console.log(a);
+  },[])
   return (
-    <>
-      <CustomCommonTable tableheaders={tableTh} >
-      {tableData.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                {item.isActive&&<TableCell>{item.customer}</TableCell>}
-                <TableCell>{item.invoice}</TableCell>
-                <TableCell>{item.challan}</TableCell>
-                <TableCell>{item.amount}</TableCell>
-                <TableCell>{item.sales}</TableCell>
-                <TableCell>{item.date}</TableCell>
-                <TableCell>{item.status}</TableCell>
-                <TableCell>{item.action}</TableCell>
-              </TableRow>
-            ))}
-      </CustomCommonTable>
-      <div className="d-flex flex-column">
-        {tableheaders.map((item, i) => (
-          <Switch
-            defaultChecked
-            key={item.id}
-            onChange={(e) => handleChangeTable(e, i)}
-          />
+    <div className=" d-flex">
+      {/* <form onSubmit={submitForm}>
+        {inputField?.map((item,i) => (
+          <HookFormInput label="Name">
+            <input
+              // {...register("name")}
+              name="name"
+              type="text"
+              className="js-form-input"
+              placeholder="enter your name"
+            />
+          </HookFormInput>
         ))}
-      </div>
-    </>
+        <div className="mt-2 text-end">
+          <JsButton
+            onClick={() => {
+              setInputField([...inputField, { name: "", number: "" }]);
+            }}
+
+          >
+            Add
+          </JsButton>
+        </div>
+        <JsButton type="submit">Submit</JsButton>
+      </form> */}
+      {hierarcyTree?.map((item, i) => (
+        <>
+          <span
+            onClick={() => handleClick(item?.i)}
+            className="d-flex align-items-center justify-content-center me-3"
+            style={{
+              display: "inline-block",
+              height: "100px",
+              width: "100px",
+              background: "pink",
+            }}
+          >
+            +
+          </span>
+        </>
+      ))}
+    </div>
   );
 };
 

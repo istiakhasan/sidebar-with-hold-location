@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { Skeleton } from "@mui/material";
 
 function CircularProgressWithLabel(props) {
   return (
@@ -52,8 +53,122 @@ export default function Loading() {
   }, []);
 
   return (
-    <div style={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <CircularProgressWithLabel value={progress} />
+    // <div style={{height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
+    //     <CircularProgressWithLabel value={progress} />
+    // </div>
+    <div  style={{height:"100vh",width:"100%",overflow:"hidden"}}>
+      <div style={{ display: "flex" }}>
+        <div style={{ width: "300px" }}>
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton height={"60px"} sx={{ marginLeft: "20px" }} />
+          <Skeleton
+            height={"60px"}
+            sx={{ marginLeft: "20px" }}
+            animation="wave"
+          />
+          <Skeleton
+            height={"60px"}
+            sx={{ marginLeft: "20px" }}
+            animation={false}
+          />
+        </div>
+        <hr
+          style={{
+            height: "100vh",
+            width: "3px",
+            background: "#E3E3E3",
+            margin: "0 20px",
+          }}
+        />
+        <div style={{ flex: "1" }}>
+          <Skeleton height={200} sx={{ marginTop: "0" }} />
+          <Skeleton sx={{width:"100%"}} />
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+          <small>
+            <Skeleton />
+          </small>
+
+
+
+
+
+        </div>
+      </div>
     </div>
   );
 }

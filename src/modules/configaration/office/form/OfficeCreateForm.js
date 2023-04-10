@@ -8,11 +8,11 @@ import { useSelector } from "react-redux";
 import AsyncSelect from 'react-select/async';
 
 
-const OfficeCreateForm = () => {
-  const { formikProps } = useOffice();
+const OfficeCreateForm = ({refetch}) => {
+  const { formikProps } = useOffice(refetch);
   const { values, handleChange } = formikProps;
   const { branch, district } = useSelector(state => state.authReducer)
-  
+
   const filterColors = (inputValue) => {
     return district.filter((i) =>
       i.label.toLowerCase().includes(inputValue.toLowerCase())
@@ -27,7 +27,7 @@ const OfficeCreateForm = () => {
       cb(filterColors(inputValue));
     }, 1000);
   };
- 
+
   return (
     <form onSubmit={formikProps.handleSubmit}>
       <JsButton

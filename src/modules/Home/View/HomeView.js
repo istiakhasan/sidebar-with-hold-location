@@ -105,7 +105,7 @@ const HomeView = () => {
         <HomeCard title="New Employess" percentage="34 hires" total="81" />
       </div>
       <div className="row mt-2">
-        <div style={{ height: "auto" }} className="col-md-8">
+        <div style={{ height: "auto" }} className="col-md-12 col-xl-8">
           <div style={{ height: "100%" }} className=" bar-chart-wraper">
             <div id="chart">
               <ReactApexChart
@@ -117,7 +117,7 @@ const HomeView = () => {
             </div>
           </div>
         </div>
-        <div style={{ height: "auto" }} className="col-md-4  ">
+        <div style={{ height: "auto" }} className="col-md-12 col-xl-4  ">
           <div
             style={{ height: "100%", marginBottom: 0, paddingBottom: "0" }}
             className="bar-chart-wraper "
@@ -125,7 +125,7 @@ const HomeView = () => {
             <DashboardTimeline />
           </div>
         </div>
-        <div className="col-md-8 mt-4 ">
+        <div className="col-md-12 col-xl-8 mt-4 ">
           <div className="bar-chart-wraper table-responsive">
             <p className="text-secondary">Sales Overview :</p>
             <table className="w-100">
@@ -163,7 +163,7 @@ const HomeView = () => {
             </table>
           </div>
         </div>
-        <div className="col-md-4 mt-4">
+        <div className="col-md-12 col-xl-4 mt-4">
           <div className="bar-chart-wraper">
             <p >
               <img

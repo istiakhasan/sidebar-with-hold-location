@@ -4,12 +4,12 @@ import { toast } from "react-toastify";
 import auth from "../../../../firebase.config/firebase.config";
 import { createOffice } from "../api/office_api";
 
-const useOffice = () => {
+const useOffice = (refetch) => {
   const [user] = useAuthState(auth);
   const formikProps = useFormik({
-     enableReinitialize:true,
+    enableReinitialize: true,
     initialValues: {
-      businessUnit:"",
+      businessUnit: "",
       officeName: "",
       officeEmail: "",
       address: "",
@@ -18,13 +18,14 @@ const useOffice = () => {
     },
     onSubmit: (values) => {
       createOffice(values, user?.email, (res) => {
-        formikProps.resetForm()
-        toast.success("Office created successfully...")
+        formikProps.resetForm();
+        refetch()
+        toast.success("Office created successfully...");
       });
     },
   });
 
-  return { formikProps };
+  return { formikProps};
 };
 
 export default useOffice;

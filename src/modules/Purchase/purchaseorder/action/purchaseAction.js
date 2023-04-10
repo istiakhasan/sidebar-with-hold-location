@@ -82,3 +82,12 @@ export const handleSaveData = async (
     toast.error(error.message);
   }
 };
+
+
+export const getPurchaseOrderLanding = (email,selectedBranch,setter) => {
+  fetch(
+    `http://localhost:8080/api/v1/purchase?email=${email}&branchId=${selectedBranch}&status=pending`
+  )
+    .then((res) => res.json())
+    .then((data) => setter(data?.data));
+};
