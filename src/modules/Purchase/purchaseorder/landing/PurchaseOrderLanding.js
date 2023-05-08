@@ -64,7 +64,7 @@ const PurchaseOrderLanding = () => {
 
   useEffect(() => {
     getPurchaseOrderLanding(user?.email,selectedBranch?.value,setGridData);
-  }, [selectedBranch?.value, user?.email]);
+  }, [selectedBranch, user?.email]);
 
   if (loading) {
     return <Loading />;

@@ -8,18 +8,16 @@ import PurchaseOrderTabs from "./modules/Purchase/purchaseorder/PurchaseOrderTab
 import PurchasePayment from "./modules/Purchase/purchasePayment/view/PurchasePayment";
 import PurchaseReport from "./modules/Purchase/purchasereport/view/PurchaseReport";
 import PurchaseReturn from "./modules/Purchase/purchasereturn/view/PurchaseReturn";
-
 import PurchaseReveive from "./modules/Purchase/purchasereveive/view";
 import PurchaseRequestTabs from "./modules/Purchase/request/PurchaseRequestTabs";
 import CustomCalnder from "./modules/sales/CustomCalandar/CustomCalnder";
 import FormikYup from "./modules/sales/FormikYup/FormikYup";
 import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
-
-
+import SalesOrderTab from "./modules/sales/salesorder/SalesOrderTab";
+import SalesApproveTabs from "./modules/sales/salesapprove/SalesApproveTabs";
 
 
 const HomeView = React.lazy(() => import("./modules/Home/View/HomeView"));
-
 export const routingList = [
   {
     id: 1,
@@ -95,5 +93,15 @@ export const routingList = [
     id:13,
     path:"/inventory/inventoryreports",
     component:<InventoryReportTabs  />
+  },
+  {
+    id:14,
+    path:"/sales/salesorder",
+    component:<SalesOrderTab  />
+  },
+  {
+    id:15,
+    path:"/sales/soapprove",
+    component:<SalesApproveTabs />
   },
 ];

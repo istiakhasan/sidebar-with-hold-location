@@ -7,11 +7,15 @@
   width: 100%;
   margin: 0 auto;
 }
+.table-responsive table{
+  width: 100%;
+}
 
 .table-responsive table td {
   font-size: 12px;
   color: #5a5a55;
   padding: 2px 4px !important;
+
 }
 .table-responsive table th {
   font-size: 12px;

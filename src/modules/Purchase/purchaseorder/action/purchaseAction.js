@@ -27,7 +27,6 @@ export const getSupplierList = (user, setSupplierList) => {
 };
 
 export const handleRowDto = (value, rowDto, setRowDto) => {
-    console.log(value,"value");
   const isAlreadyExist = rowDto?.find(
     (itm) => itm?.value === value?.item?.value
   );
@@ -66,7 +65,7 @@ export const handleSaveData = async (
   values,
   cb
 ) => {
- 
+
   try {
     const res = await axios.post(`http://localhost:8080/api/v1/purchase`, {
       product: rowDto,

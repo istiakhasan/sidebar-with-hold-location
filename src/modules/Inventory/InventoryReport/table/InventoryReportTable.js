@@ -43,7 +43,7 @@ const InventoryReportTable = () => {
               <td>{v?.itemName ? v?.itemName : "--"}</td>
               <td>{v?.itemType?.label ? v?.itemType?.label : "--"}</td>
               <td className="text-center">
-                {v?.purchase_quantity ? v?.purchase_quantity : "--"}
+                {v?.quantity ? v?.quantity : "--"}
               </td>
               <td style={{ paddingRight: "20px" }} className="text-end">
                 <MuiCommonIcon />

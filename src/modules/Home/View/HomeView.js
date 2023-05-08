@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.config/firebase.config";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import HomeCard from "./HomeCard";
 import ReactApexChart from "react-apexcharts";
 import DashboardTimeline from "./DashboardTimeline";

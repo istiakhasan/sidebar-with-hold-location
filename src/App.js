@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import fetchBranches from "./redux/thunk/fetchBranches";
 import fetchDistrict from "./redux/thunk/fetchDistricts";
 import fetchRoute from "./redux/thunk/fetchRoute";
-import { height } from "@mui/system";
+
 
 const App = () => {
   const [user, loading] = useAuthState(auth);
@@ -61,7 +61,7 @@ const App = () => {
               key={item.id}
               path={item.path}
               element={
-                <Suspense fallback={<Loading />}>
+                <Suspense fallback={<span>Loading</span>}>
                   <PrivateRoute>{item.component}</PrivateRoute>
                 </Suspense>
               }
