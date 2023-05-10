@@ -20,7 +20,7 @@ const PurchaseReveiveLanding = () => {
   const saveRef = useRef();
   const [show, setShow] = useState(false);
   const [rowDto, setRowDto] = useState({});
-  const [currentRowId,setCurrentRowId]=useState('')
+  const [currentRowId, setCurrentRowId] = useState("");
   const tableheaders = [
     {
       id: "89",
@@ -66,10 +66,13 @@ const PurchaseReveiveLanding = () => {
     },
   ];
 
-
   useEffect(() => {
-    getPurchaseOrderReveiveLanding(user?.email,selectedBranch?.value,setGridData);
-  }, [selectedBranch?.value,user.email]);
+    getPurchaseOrderReveiveLanding(
+      user?.email,
+      selectedBranch?.value,
+      setGridData
+    );
+  }, [selectedBranch?.value, user.email]);
 
   return (
     <div className="table-responsive mt-2">
@@ -90,8 +93,7 @@ const PurchaseReveiveLanding = () => {
                   onClick={() => {
                     setRowDto(item);
                     setShow(true);
-                    setCurrentRowId(item?._id)
-
+                    setCurrentRowId(item?._id);
                   }}
                   sx={{ marginRight: "10px" }}
                 >
@@ -111,7 +113,15 @@ const PurchaseReveiveLanding = () => {
           saveRef={saveRef}
           isView={true}
         >
-          <PurchaseReceiveForm user={user} currentRowId={currentRowId} setGridData={setGridData} selectedBranch={selectedBranch}  rowDto={rowDto} setRowDto={setRowDto} saveRef={saveRef} />
+          <PurchaseReceiveForm
+            user={user}
+            currentRowId={currentRowId}
+            setGridData={setGridData}
+            selectedBranch={selectedBranch}
+            rowDto={rowDto}
+            setRowDto={setRowDto}
+            saveRef={saveRef}
+          />
         </CustomModal>
       )}
     </div>

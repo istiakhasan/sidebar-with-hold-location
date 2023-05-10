@@ -3,20 +3,26 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import stockTable from "./stocktable.module.css";
 import MuiCommonIcon from "../../../../common/MuiCommonIcon";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../firebase.config/firebase.config";
+import { useSelector } from "react-redux";
 const InventoryReportTable = () => {
-  // const [gridData, setGridData] = useState([]);
+  const [user] = useAuthState(auth);
+  const { selectedBranch } = useSelector((state) => state?.authReducer);
   const {
     data: gridData,
     isLoading,
     error,
-  } = useQuery(["stock"], () =>
-    fetch("http://localhost:8080/api/v1/stock").then((res) => res.json())
+  } = useQuery(
+    ["inventory_report", selectedBranch?.value],
+    async () => {
+      const res = await fetch(
+        `http://localhost:8080/api/v1/stock?email=${user.email}&branchId=${selectedBranch?.value || ''}`
+      );
+
+      return  res.json();
+    }
   );
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/api/v1/stock")
-  //     .then((res) => res.json())
-  //     .then((data) => setGridData(data));
-  // }, []);
   if (isLoading) {
     return;
   }

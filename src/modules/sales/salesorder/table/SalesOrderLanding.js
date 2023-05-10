@@ -1,28 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../../firebase.config/firebase.config";
-import { useSelector } from "react-redux";
-import Loading from "../../../../common/loding";
+import React from "react";
 import MuiCommonIcon from "../../../../common/MuiCommonIcon";
-
-const SalesOrderLanding = () => {
-  const [landingData, setLandingData] = useState([]);
-  const { selectedBranch } = useSelector((state) => state?.authReducer);
-  const [user, loading] = useAuthState(auth);
-  console.log(selectedBranch?.value, "branch");
-  useEffect(() => {
-    axios
-      .get(
-        `http://localhost:8080/api/v1/sales?email=${user.email}&branchId=${selectedBranch?.value}`
-      )
-      .then((res) => setLandingData(res?.data?.data));
-  }, [user.email, selectedBranch]);
-
-  if (loading) {
-    return <Loading />;
-  }
-  console.log(landingData, "landing data ");
+import axios from "axios";
+import { toast } from "react-toastify";
+import CommonConfirmAlert from "../../../../common/ConfirmAlert";
+const SalesOrderLanding = ({ landingData, selectedBranch, user, refetch }) => {
+  const handleDeleteSalesOrder = (id, status) => {
+    const url = `http://localhost:8080/api/v1/sales/salesapprove/${id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=${status}`;
+    axios.delete(url).then((res) => {
+      if (res?.data?.data?.deletedCount === 1) {
+        toast.success("Delete order successfully.");
+        refetch();
+      }
+    });
+  };
   return (
     <div className="table-responsive">
       <table>
@@ -39,7 +29,7 @@ const SalesOrderLanding = () => {
           </tr>
         </thead>
         <tbody>
-          {landingData?.map((v, i) => {
+          {landingData?.data?.map((v, i) => {
             console.log(landingData, "landing data");
             return v.products?.map((itm, j) => {
               return (
@@ -73,8 +63,12 @@ const SalesOrderLanding = () => {
                             <span
                               style={{
                                 color: "green",
-                                fontWeight: "bold",
+                                // background: "green",
+                                // color: "white",
+                                padding: "2px 5px",
+                                borderRadius: "4px",
                                 fontSize: "11px",
+                                cursor: "not-allowed",
                               }}
                             >
                               {v?.status}
@@ -82,8 +76,11 @@ const SalesOrderLanding = () => {
                           ) : (
                             <span
                               style={{
+                                // background: "goldenrod",
                                 color: "goldenrod",
-                                fontWeight: "bold",
+                                // color: "white",
+                                padding: "2px 5px",
+                                borderRadius: "4px",
                                 fontSize: "11px",
                               }}
                             >
@@ -98,8 +95,25 @@ const SalesOrderLanding = () => {
                     </td>
                     {j === 0 && (
                       <>
-                        <td className="text-end" rowSpan={v?.products?.length}>
-                          <MuiCommonIcon name={"delete"} color={"red"} />
+                        <td className="text-end " rowSpan={v?.products?.length}>
+                          <p className="pe-2">
+                            {v?.status?.toLowerCase() === "approved" ? (
+                              "--"
+                            ) : (
+                              <span
+                                onClick={() =>
+                                  CommonConfirmAlert(
+                                    () =>
+                                      handleDeleteSalesOrder(v?._id, v?.status),
+                                    "Confirm to submit !",
+                                    "Are you sure to delete this order ?"
+                                  )
+                                }
+                              >
+                                <MuiCommonIcon name={"delete"} color={"red"} />
+                              </span>
+                            )}
+                          </p>
                         </td>
                       </>
                     )}
@@ -108,36 +122,6 @@ const SalesOrderLanding = () => {
               );
             });
           })}
-          {/* {landingData.map((v, i) => {
-            return <tr key={i}>
-                <td>{i+1}</td>
-                <td>{v?.customer?.label}</td>
-                <td>{v?.item?.label}</td>
-                <td className="text-center">{v?.purchase_price}</td>
-                <td className="text-center">{v?.purchase_quantity}</td>
-                <td className="text-center"> {
-                  v?.status==="approved"?  <span
-                  style={{
-                    color: "green",
-                    fontWeight: "bold",
-                    fontSize: "11px",
-                  }}
-                >
-                  {v?.status}
-                </span>:<span
-                  style={{
-                    color: "goldenrod",
-                    fontWeight: "bold",
-                    fontSize: "11px",
-                  }}
-                >
-                  {v?.status}
-                </span>
-                }</td>
-                <td className="text-center">{v?.purchase_price * v?.purchase_quantity}</td>
-                <td className="text-end"><MuiCommonIcon name={"delete"} fontSize={"small"} color={"red"} /></td>
-            </tr>;
-          })} */}
         </tbody>
       </table>
     </div>

@@ -14,7 +14,6 @@ import moment from "moment/moment";
 import {
   calculateTotal,
   getItemList,
-  getPurchaseOrderLanding,
   getSupplierList,
   handleRowDto,
   handleSaveData,
@@ -38,10 +37,10 @@ const PurchaseOrderForm = () => {
         if(res?.status){
           toast.success("Checkout successfully")
           setRowDto([])
-          
+
           formikProps.resetForm()
         }
-        
+
       });
     },
   });
@@ -51,7 +50,7 @@ const PurchaseOrderForm = () => {
     getItemList(user, selectedBranch, setItemList);
     getSupplierList(user, setSupplierList);
   }, [selectedBranch, user?.email, user]);
-  
+
   return (
     <form onSubmit={formikProps?.handleSubmit}>
       <div

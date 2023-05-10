@@ -16,16 +16,16 @@ const PurchaseReceiveForm = ({
   setGridData,
   currentRowId,
 }) => {
-  const [rowDto,setRowDto]=useState({})
-  const getPurchaseReciveById=()=>{
+  const [rowDto, setRowDto] = useState({});
+  const getPurchaseReciveById = () => {
     fetch(
       `http://localhost:8080/api/v1/purchase/purchasereceive/${currentRowId}?email=${user?.email}&branchId=${selectedBranch?.value}&status=receive`
     )
       .then((res) => res.json())
       .then((data) => setRowDto(data?.data));
-  }
+  };
   useEffect(() => {
-      getPurchaseReciveById()
+    getPurchaseReciveById();
   }, [currentRowId]);
   console.log(currentRowId, "check");
   const handleModifyPropertyy = (i, value, setter, obj, property) => {
@@ -52,7 +52,7 @@ const PurchaseReceiveForm = ({
       .then((res) => res.json())
       .then((data) => {
         if (data.message === "Success") {
-          getPurchaseReciveById()
+          getPurchaseReciveById();
         }
       });
   };

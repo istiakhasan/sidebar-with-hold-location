@@ -1,4 +1,4 @@
-/* 
+/*
 
 bodycolor=#2B2B2B
 wrapercolor=#423F3E
@@ -6,10 +6,10 @@ wrapertwocolor=#171010
 buttoncolor=#362222
 */
 
-/* 
-white color palet 
+/*
+white color palet
 bodycolor=#eaf6f6
-buttoncolor=#66bfbf 
+buttoncolor=#66bfbf
 background=#fcfefe
 
 backgroundcolor2=#f76b8a
@@ -21,7 +21,7 @@ backgroundcolor2=#f76b8a
   --secondary: #b6eb7a;
   --main: rgb(23, 110, 109);
   --mainButton: #fb7813;
-  --componentbg:rgba(23, 110, 109,.1);
+  --componentbg: rgba(23, 110, 109, 0.1);
 }
 body {
   /* background-color: #fcfefe !important;1st style */
@@ -135,8 +135,8 @@ strong {
 /* .nav-tabs .nav-item.show .nav-link, */
 .nav-tabs .nav-link.active {
   border: none;
-  color: var(--main)!important;
-  border-bottom:1px solid var(--main) !important;
+  color: var(--main) !important;
+  border-bottom: 1px solid var(--main) !important;
   border-width: 3px !important;
   padding: 5px 0;
 }
@@ -161,33 +161,38 @@ color: black !important;
 /* ============================================================================top menu========================================== */
 .navbar.navbar-wraper {
   width: 100%;
- max-height: 80px;
+  max-height: 80px;
   background: var(--main);
   border-bottom: 1px solid #66bfbf;
   display: flex;
   align-items: center;
   justify-content: space-between;
- 
 }
-.toggleIconWrapper{
-  color:var(--primarybg);
+.toggleIconWrapper {
+  color: var(--primarybg);
   font-size: 11px;
-
 }
-.toggleIconWrapper:hover{
+.toggleIconWrapper:hover {
   color: white;
 }
 /* ============================================================================sidebar========================================== */
 
-
-
-
-
-
 /* ===================================================tabs title================================ */
 
-.tabs-title{
+.tabs-title {
   color: var(--main);
 }
 
+/* react confirm modal  */
+.react-confirm-alert-body {
+  width: fit-content !important;
+  max-width: 600px !important;
+  min-width: 500px;
+}
 
+.react-confirm-alert-body > h1 {
+  margin-top: 0;
+  font-size: 30px;
+  color: #000000;
+  font-weight: 600;
+}

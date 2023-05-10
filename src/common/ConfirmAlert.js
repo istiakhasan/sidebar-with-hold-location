@@ -1,12 +1,12 @@
 
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-const ConfirmAlert = ({yesFunction,title,message}) => {
+const CommonConfirmAlert = (yesFunction,title,message) => {
   confirmAlert({
     title: title,
     message: message,
     overlayClassName: "confirm-class",
-    
+
     buttons: [
       {
         label: "Yes",
@@ -20,7 +20,7 @@ const ConfirmAlert = ({yesFunction,title,message}) => {
     ],
   })
 
-   
+
 };
 
-export default ConfirmAlert;
+export default CommonConfirmAlert;

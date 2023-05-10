@@ -15,6 +15,7 @@ import FormikYup from "./modules/sales/FormikYup/FormikYup";
 import SalesQuotation from "./modules/sales/salesquotaion/view/SalesQuotation";
 import SalesOrderTab from "./modules/sales/salesorder/SalesOrderTab";
 import SalesApproveTabs from "./modules/sales/salesapprove/SalesApproveTabs";
+import SalesDeliveryTabs from "./modules/sales/salesdelivery/SalesDeliveryTabs";
 
 
 const HomeView = React.lazy(() => import("./modules/Home/View/HomeView"));
@@ -103,5 +104,10 @@ export const routingList = [
     id:15,
     path:"/sales/soapprove",
     component:<SalesApproveTabs />
+  },
+  {
+    id:16,
+    path:"/sales/salesdelivery",
+    component:<SalesDeliveryTabs />
   },
 ];

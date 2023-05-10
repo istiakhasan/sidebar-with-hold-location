@@ -1,33 +1,30 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.config/firebase.config";
 import { useSelector } from "react-redux";
 import Loading from "../../../../common/loding";
 import MuiCommonIcon from "../../../../common/MuiCommonIcon";
-import { confirmAlert } from "react-confirm-alert";
+
 import CommonConfirmAlert from "../../../../common/ConfirmAlert";
 import { useQuery } from "@tanstack/react-query";
+import JsButton from "../../../../common/JsButton";
+import CustomModal from "../../../../common/CustomModal";
+import { useState } from "react";
+import SalesDeliveryForm from "../form/SalesDeliveryForm";
 
-const SalesApproveLanding = () => {
-  // const [landingData, setLandingData] = useState([]);
+const SalesDeliveryLanding = () => {
   const { selectedBranch } = useSelector((state) => state?.authReducer);
   const [user, loading] = useAuthState(auth);
-  console.log(selectedBranch?.value, "branch");
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `http://localhost:8080/api/v1/sales/?email=${user.email}&branchId=${selectedBranch?.value}`
-  //     )
-  //     .then((res) => setLandingData(res?.data?.data));
-  // }, [user.email, selectedBranch]);
+  const [show,setShow]=useState(false)
+  const [deliveryItem,setDeliveryItem]=useState({})
   const {
     data: landingData,
     isLoading,
     refetch,
   } = useQuery(["allsales", selectedBranch?.value], async () => {
     const res = await fetch(
-      `http://localhost:8080/api/v1/sales?email=${user.email}&branchId=${selectedBranch?.value}`
+      `http://localhost:8080/api/v1/sales?email=${user.email}&branchId=${selectedBranch?.value}&status=approved`
     );
 
     return res.json();
@@ -63,11 +60,11 @@ const SalesApproveLanding = () => {
         </thead>
         <tbody>
           {landingData?.data?.map((v, i) => {
-            console.log(landingData, "landing data");
+
             return v.products?.map((itm, j) => {
               return (
                 <>
-                  <tr>
+                  <tr key={j}>
                     {j === 0 && (
                       <>
                         <td rowSpan={v?.products?.length}>{i + 1}</td>
@@ -105,12 +102,9 @@ const SalesApproveLanding = () => {
                           ) : (
                             <span
                               style={{
-                               background: "goldenrod",
-                              //  color: "goldenrod",
-                               color: "white",
-                               padding: "2px 5px",
-                               borderRadius: "4px",
-                               fontSize: "11px",
+                                color: "goldenrod",
+                                fontWeight: "bold",
+                                fontSize: "11px",
                               }}
                               onClick={() => {
                                 CommonConfirmAlert(
@@ -132,7 +126,11 @@ const SalesApproveLanding = () => {
                     {j === 0 && (
                       <>
                         <td className="text-end" rowSpan={v?.products?.length}>
-                          <MuiCommonIcon name={"delete"} color={"red"} />
+                          <span onClick={()=>{
+                            setDeliveryItem(v)
+                            setShow(true)}}>
+                            <JsButton>Delivery</JsButton>
+                          </span>
                         </td>
                       </>
                     )}
@@ -143,8 +141,31 @@ const SalesApproveLanding = () => {
           })}
         </tbody>
       </table>
+
+      {show && (
+        <CustomModal
+          setShow={setShow}
+          title={"Sales delivery "}
+          show={show}
+
+          isView={true}
+        >
+          {/* <PurchaseReceiveForm
+            user={user}
+            currentRowId={currentRowId}
+            setGridData={setGridData}
+            selectedBranch={selectedBranch}
+            rowDto={rowDto}
+            setRowDto={setRowDto}
+            saveRef={saveRef}
+          /> */}
+
+          <SalesDeliveryForm deliveryItem={deliveryItem} />
+
+        </CustomModal>
+      )}
     </div>
   );
 };
 
-export default SalesApproveLanding;
+export default SalesDeliveryLanding;
