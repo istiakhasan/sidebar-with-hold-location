@@ -13,6 +13,7 @@ import auth from "../firebase.config/firebase.config";
 import { useNavigate } from "react-router-dom";
 import Loading from "../common/loding";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 let signUpValidation = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -45,7 +46,6 @@ const Login = () => {
   const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
   useEffect(() => {
     window.addEventListener("resize", () => {
-    
       if (window.innerWidth < 750) {
         setSmallSize(true);
       } else {
@@ -53,7 +53,15 @@ const Login = () => {
       }
     });
   }, []);
-  
+  const saveUserInfoToDb = async (email, name, phone) => {
+    const res = await axios.post("http://localhost:8080/api/v1/user", {
+      email,
+      name,
+      phone,
+    });
+
+    console.log(res,"res save user info");
+  };
   const { handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { mobileno: "", password: "", name: "", email: "" },
     validationSchema: isSignUp ? signUpValidation : loginValidation,
@@ -63,10 +71,13 @@ const Login = () => {
         signInWithEmailAndPassword(values.email, values.password);
       } else {
         await createUserWithEmailAndPassword(values.email, values.password);
-        await updateProfile({
+        const a = await updateProfile({
           displayName: values.name,
           phoneNumber: values.mobileno,
         });
+        if (a) {
+          saveUserInfoToDb(values.email, values.name, values.mobileno);
+        }
       }
     },
   });
@@ -77,7 +88,6 @@ const Login = () => {
     return <Loading />;
   }
   if (user) {
-   
     navigate("/");
   }
 

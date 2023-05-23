@@ -38,7 +38,7 @@ const App = () => {
     });
     dispatch(fetchBranches(user?.email));
     dispatch(fetchDistrict());
-    dispatch(fetchRoute());
+    dispatch(fetchRoute(user?.email));
   }, [user?.email, dispatch]);
   if (loading) {
     return <Loading />;

@@ -24,7 +24,8 @@ const SalesOrderForm = () => {
   const { selectedBranch } = useSelector((state) => state?.authReducer);
   // load all available products
   const loadAllAvailAbleProducts = async (setter) => {
-    const res = await axios.get("http://localhost:8080/api/v1/stock");
+    console.log("check ....");
+    const res = await axios.get(`http://localhost:8080/api/v1/stock?branchId=${selectedBranch?.value || ""}`);
     const modifyData = res?.data?.map(
       ({ itemName, itemCode, quantity, ...rest }, i) => {
         console.log(rest, "rest");
