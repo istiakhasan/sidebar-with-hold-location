@@ -1,7 +1,6 @@
-import { async } from "@firebase/util";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 
 export const createOffice = async (values, userEmail, cb) => {
   const payload = {
@@ -14,10 +13,9 @@ export const createOffice = async (values, userEmail, cb) => {
     distric: values.distric,
     branch: values?.businessUnit,
   };
-  console.log(payload, "payload");
   try {
     const res = await axios.post(
-      `http://localhost:8080/api/v1/office`,
+      `${baseUrs()}/office`,
       payload
     );
     if (res?.data?.status === true) {
@@ -30,12 +28,4 @@ export const createOffice = async (values, userEmail, cb) => {
   }
 };
 
-// export const getOfficeLanding = async (email, branchId, setter) => {
-//   const res = await axios.get(
-//     `http://localhost:8080/api/v1/office/?email=${email}&branchId=${
-//       branchId || 0
-//     }`
-//   );
 
-//   setter(res?.data?.data);
-// };

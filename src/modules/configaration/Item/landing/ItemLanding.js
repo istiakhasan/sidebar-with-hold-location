@@ -7,14 +7,16 @@ import { useSelector } from "react-redux";
 import CustomCommonTable from "../../../../common/CustomCommonTable";
 import MuiCommonIcon from "../../../../common/MuiCommonIcon";
 import auth from "../../../../firebase.config/firebase.config";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 
 const ItemLanding = () => {
   const [user] = useAuthState(auth);
+
   const [gridData, setGridData] = useState([]);
-  const { selectedBranch } = useSelector((state) => state.authReducer);
+  const {selectedBranch} = useSelector((state) => state.authReducer);
   useEffect(() => {
     fetch(
-      `http://localhost:8080/api/v1/product/?email=${user?.email}&branchId=${selectedBranch?.value}`
+      `${baseUrs()}/product/?email=${user?.email}&branchId=${selectedBranch?.value}`
     )
       .then((res) => res.json())
       .then((data) => setGridData(data?.data));

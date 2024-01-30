@@ -1,33 +1,26 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.config/firebase.config";
 import { useSelector } from "react-redux";
 import Loading from "../../../../common/loding";
 import MuiCommonIcon from "../../../../common/MuiCommonIcon";
-import { confirmAlert } from "react-confirm-alert";
 import CommonConfirmAlert from "../../../../common/ConfirmAlert";
 import { useQuery } from "@tanstack/react-query";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 
 const SalesApproveLanding = () => {
   // const [landingData, setLandingData] = useState([]);
   const { selectedBranch } = useSelector((state) => state?.authReducer);
   const [user, loading] = useAuthState(auth);
-  console.log(selectedBranch?.value, "branch");
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `http://localhost:8080/api/v1/sales/?email=${user.email}&branchId=${selectedBranch?.value}`
-  //     )
-  //     .then((res) => setLandingData(res?.data?.data));
-  // }, [user.email, selectedBranch]);
+
   const {
     data: landingData,
     isLoading,
     refetch,
   } = useQuery(["allsales", selectedBranch?.value], async () => {
     const res = await fetch(
-      `http://localhost:8080/api/v1/sales?email=${user.email}&branchId=${selectedBranch?.value}`
+      `${baseUrs()}/sales?email=${user.email}&branchId=${selectedBranch?.value}`
     );
 
     return res.json();
@@ -41,7 +34,7 @@ const SalesApproveLanding = () => {
   const approveSalesOrder = (id) => {
     axios
       .patch(
-        `http://localhost:8080/api/v1/sales/salesapprove/${id}?email=${user.email}&branchId=${selectedBranch?.value}&status=pending`
+        `${baseUrs()}/sales/salesapprove/${id}?email=${user.email}&branchId=${selectedBranch?.value}&status=pending`
       )
       .then((res) => refetch());
   };
@@ -63,7 +56,6 @@ const SalesApproveLanding = () => {
         </thead>
         <tbody>
           {landingData?.data?.map((v, i) => {
-            console.log(landingData, "landing data");
             return v.products?.map((itm, j) => {
               return (
                 <>

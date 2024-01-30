@@ -3,9 +3,10 @@ import MuiCommonIcon from "../../../../common/MuiCommonIcon";
 import axios from "axios";
 import { toast } from "react-toastify";
 import CommonConfirmAlert from "../../../../common/ConfirmAlert";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 const SalesOrderLanding = ({ landingData, selectedBranch, user, refetch }) => {
   const handleDeleteSalesOrder = (id, status) => {
-    const url = `http://localhost:8080/api/v1/sales/salesapprove/${id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=${status}`;
+    const url = `${baseUrs()}/sales/salesapprove/${id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=${status}`;
     axios.delete(url).then((res) => {
       if (res?.data?.data?.deletedCount === 1) {
         toast.success("Delete order successfully.");
@@ -30,7 +31,6 @@ const SalesOrderLanding = ({ landingData, selectedBranch, user, refetch }) => {
         </thead>
         <tbody>
           {landingData?.data?.map((v, i) => {
-            console.log(landingData, "landing data");
             return v.products?.map((itm, j) => {
               return (
                 <>

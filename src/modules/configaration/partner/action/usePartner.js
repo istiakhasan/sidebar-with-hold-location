@@ -48,11 +48,9 @@ const usePartner = (refetch, setShow, currentRowId) => {
   const partnerGetById = async (id, cb) => {
     try {
       const res = await axios.get(
-        `https://mclone.onrender.com/api/v1/partner/${id}`
+        `https://m-clone-server-nine.vercel.app/api/v1/partner/${id}`
       );
       if (res?.status === 200) {
-        // toast.success("Successfully Deleted", { toastId: "deleteDue" });
-
         setSingleData(res?.data?.data);
       }
     } catch (error) {

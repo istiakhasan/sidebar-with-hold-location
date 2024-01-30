@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import moment from "moment/moment";
 import React, { Fragment, useState } from "react";
 import { useEffect } from "react";
@@ -56,19 +57,9 @@ const CustomCalnder = () => {
           .endOf("month")
           .format("D")
       );
-      let end2 = moment()
-        .month(+monthValue?.value || 0)
-        .format("MMMM Do YYYY, h:mm:ss a");
 
-      const previousMonthDays = [
-        ...Array(
-          Number(
-            moment(monthValue?.value || 0)
-              .startOf("month")
-              .format("day")[0]
-          )
-        ),
-      ];
+
+
    
     } else {
       end = Number(moment(value).endOf("month").format("D"));

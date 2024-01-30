@@ -3,13 +3,12 @@ import React from "react";
 const CheckBox = ({data,setData,setFieldValue}) => {
  
   const handleChange=(value,i)=>{
-    //    console.log(value,i)
        const  _data=[...data]
        _data[i]["isChecked"]=value
        setData(_data)
        setFieldValue("selectedItem",_data)
   }
-//   console.log(data,"Data")
+
   return (
     <div>
       {data.map((item,index) => (

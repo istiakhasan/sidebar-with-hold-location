@@ -8,13 +8,14 @@ import Loading from "../../../../common/loding";
 import { useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.config/firebase.config";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 
 const PartnerLanding = () => {
   const saveRef = useRef();
   const [show, setShow] = useState(false);
   const [user]=useAuthState(auth)
   const { isLoading, error, data, refetch } = useQuery(["partnerlist"], () =>
-    fetch(`http://localhost:8080/api/v1/partner?email=${user?.email}`).then((res) => res.json())
+    fetch(`${baseUrs()}/partner?email=${user?.email}`).then((res) => res.json())
   );
 
   if (isLoading) {

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import auth from "../../../firebase.config/firebase.config";
 import OfficeCreateForm from "./form/OfficeCreateForm";
 import OfficeLanding from "./landing/OfficeLanding";
+import { baseUrs } from "../../../helpers/config/config.Env";
 
 const OfficeTabs = () => {
   document.title = "Office";
@@ -18,7 +19,7 @@ const OfficeTabs = () => {
     refetch
   } = useQuery(["officelanding", selectedBranch?.value], async () => {
     const data =await fetch(
-      `http://localhost:8080/api/v1/office/?email=${user?.email}&branchId=${
+      `${baseUrs()}/office/?email=${user?.email}&branchId=${
         selectedBranch?.value || 0
       }`
     );

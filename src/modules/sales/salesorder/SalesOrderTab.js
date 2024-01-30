@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.config/firebase.config";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../common/loding";
+import { baseUrs } from "../../../helpers/config/config.Env";
 
 const SalesOrderTab = () => {
   const { selectedBranch } = useSelector((state) => state?.authReducer);
@@ -18,7 +19,7 @@ const SalesOrderTab = () => {
     refetch,
   } = useQuery(["allsales", selectedBranch?.value], async () => {
     const res = await fetch(
-      `http://localhost:8080/api/v1/sales?email=${user.email}&branchId=${selectedBranch?.value}`
+      `${baseUrs()}/sales?email=${user.email}&branchId=${selectedBranch?.value}`
     );
 
     return res.json();

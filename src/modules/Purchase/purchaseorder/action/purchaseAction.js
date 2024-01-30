@@ -1,9 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 
 export const getItemList = (user, selectedBranch, setItemList) => {
   fetch(
-    `http://localhost:8080/api/v1/product/?email=${user?.email}&branchId=${selectedBranch?.value}`
+    `${baseUrs()}/product/?email=${user?.email}&branchId=${selectedBranch?.value}`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -20,7 +21,7 @@ export const getItemList = (user, selectedBranch, setItemList) => {
 
 export const getSupplierList = (user, setSupplierList) => {
   fetch(
-    `http://localhost:8080/api/v1/partner/partnerType/1?email=${user.email}`
+    `${baseUrs()}/partner/partnerType/1?email=${user.email}`
   )
     .then((res) => res.json())
     .then((data) => setSupplierList(data?.data));
@@ -45,7 +46,6 @@ export const handleRowDto = (value, rowDto, setRowDto) => {
 };
 
 export const calculateTotal = (value, index, price, quantity, data, setter) => {
-  console.log(value, index, price, quantity, data);
   const priceWithOutDiscount = price * quantity;
   const discount = (value * priceWithOutDiscount) / 100;
   const totalPrice = priceWithOutDiscount - discount;
@@ -67,7 +67,7 @@ export const handleSaveData = async (
 ) => {
 
   try {
-    const res = await axios.post(`http://localhost:8080/api/v1/purchase`, {
+    const res = await axios.post(`${baseUrs()}/purchase`, {
       product: rowDto,
       accountId,
       branchId,
@@ -85,7 +85,7 @@ export const handleSaveData = async (
 
 export const getPurchaseOrderLanding = (email,selectedBranch,setter) => {
   fetch(
-    `http://localhost:8080/api/v1/purchase?email=${email}&branchId=${selectedBranch}&status=pending`
+    `${baseUrs()}/purchase?email=${email}&branchId=${selectedBranch}&status=pending`
   )
     .then((res) => res.json())
     .then((data) => setter(data?.data));

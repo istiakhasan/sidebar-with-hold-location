@@ -12,6 +12,7 @@ import JsButton from "../../../../common/JsButton";
 import CustomModal from "../../../../common/CustomModal";
 import { useState } from "react";
 import SalesDeliveryForm from "../form/SalesDeliveryForm";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 
 const SalesDeliveryLanding = () => {
   const { selectedBranch } = useSelector((state) => state?.authReducer);
@@ -24,7 +25,7 @@ const SalesDeliveryLanding = () => {
     refetch,
   } = useQuery(["allsales", selectedBranch?.value], async () => {
     const res = await fetch(
-      `http://localhost:8080/api/v1/sales?email=${user.email}&branchId=${selectedBranch?.value}&status=approved`
+      `${baseUrs()}/sales?email=${user.email}&branchId=${selectedBranch?.value}&status=approved`
     );
 
     return res.json();
@@ -38,7 +39,7 @@ const SalesDeliveryLanding = () => {
   const approveSalesOrder = (id) => {
     axios
       .patch(
-        `http://localhost:8080/api/v1/sales/salesapprove/${id}?email=${user.email}&branchId=${selectedBranch?.value}&status=pending`
+        `${baseUrs()}/sales/salesapprove/${id}?email=${user.email}&branchId=${selectedBranch?.value}&status=pending`
       )
       .then((res) => refetch());
   };

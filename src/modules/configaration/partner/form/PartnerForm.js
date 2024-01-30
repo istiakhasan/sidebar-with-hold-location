@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Select from "react-select";
 import React from "react";
 import JsFormInput from "../../../../common/JsFormInput";
 import customStyles from "../../../../common/customStyles";
 import { useEffect } from "react";
 import usePartner from "../action/usePartner";
-import Loading from "../../../../common/loding";
 
 const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
   const { partnerGetById, formikProps, loading } = usePartner(
@@ -12,18 +12,15 @@ const PartnerForm = ({ currentRowId, refetch, saveRef, setShow, isView }) => {
     setShow,
     currentRowId
   );
-
+  const { handleSubmit, values, setFieldValue, handleChange } =
+    formikProps;
   useEffect(() => {
     if (currentRowId) {
       partnerGetById(currentRowId);
     }
   }, [currentRowId]);
 
-  const { handleSubmit, values, setFieldValue, handleChange, isSubmitting } =
-    formikProps;
-  // if(!loading){
-  //   return <Loading />
-  // }
+
   return (
     <div style={{ position: "relative" }} className="component-background-color">
   { loading &&   <div

@@ -1,15 +1,7 @@
 import { TableCell, TableRow } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useSelector } from "react-redux";
 import CustomCommonTable from "../../../../common/CustomCommonTable";
-import Loading from "../../../../common/loding";
 import MuiCommonIcon from "../../../../common/MuiCommonIcon";
-import auth from "../../../../firebase.config/firebase.config";
-import useOffice from "../action/useOffice";
 
 const OfficeLanding = ({data}) => {
 
@@ -66,7 +58,6 @@ const OfficeLanding = ({data}) => {
       style: { textAlign: "center" },
     },
   ];
-  console.log(data, "data fetched");
   return (
     <div className="table-responsive mt-2">
       <div className="custom-scroll" style={{ maxHeight: "600px" }}>

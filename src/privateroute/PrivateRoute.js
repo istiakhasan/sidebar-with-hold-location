@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import Loading from "../common/loding";
 import auth from "../firebase.config/firebase.config";
 import { signOut } from "firebase/auth";
+import { baseUrs } from "../helpers/config/config.Env";
 
 const PrivateRoute = ({ children }) => {
   const [user, loading] = useAuthState(auth);
@@ -17,11 +18,10 @@ const PrivateRoute = ({ children }) => {
     if (location.pathname.split("/")[1]) {
 
       fetch(
-        `http://localhost:8080/api/v1/routelisttwo/protect?email=${user.email}&path=${location.pathname}`
+        `${baseUrs()}/routelisttwo/protect?email=${user?.email}&path=${location?.pathname}`
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.status, "data");
           if (data.status) {
             setPermission(true);
           } else {
@@ -31,16 +31,14 @@ const PrivateRoute = ({ children }) => {
           }
         });
     } else {
-      console.log("not in ");
     }
     setPermissionLoasing(false)
-  }, [user.email, location.pathname]);
+  }, [user?.email, location.pathname]);
 
   if (loading || permssionLoading) {
     return;
   }
   if (!user || !permission) {
-    console.log("i am in  navigate", permission);
     return <Navigate to={"/login"} state={{ from: location }} replace />;
   }
 

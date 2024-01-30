@@ -1,12 +1,13 @@
 import axios from "axios"
 import actionType from "../actionTypes/actionTypes"
+import { baseUrs } from "../../helpers/config/config.Env"
 
 
 
 const fetchRoute=(email)=>{
     return async(dispatch,getState)=>{
         try {
-            const res=await axios.get(`http://localhost:8080/api/v1/routelisttwo?email=${email}`)
+            const res=await axios.get(`${baseUrs()}/routelisttwo?email=${email}`)
             dispatch({type:actionType.LOAD_ROUTES,payload:res?.data?.data})
 
         } catch (error) {

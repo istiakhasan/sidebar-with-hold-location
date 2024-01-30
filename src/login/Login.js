@@ -12,8 +12,8 @@ import {
 import auth from "../firebase.config/firebase.config";
 import { useNavigate } from "react-router-dom";
 import Loading from "../common/loding";
-import { useDispatch } from "react-redux";
 import axios from "axios";
+import { baseUrs } from "../helpers/config/config.Env";
 
 let signUpValidation = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -31,19 +31,17 @@ const Login = () => {
   // all use state  start
   const [isSignUp, setIsSignUp] = useState(false);
   const [smallSize, setSmallSize] = useState(false);
-  const dispatch = useDispatch();
-  // all use state end
   const navigate = useNavigate();
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, user, loading] =
     useSignInWithEmailAndPassword(auth);
   const [
     createUserWithEmailAndPassword,
-    CreateUser,
+    ,
     signUploading,
-    signUperror,
+    ,
   ] = useCreateUserWithEmailAndPassword(auth);
 
-  const [updateProfile, updating, updateerror] = useUpdateProfile(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
   useEffect(() => {
     window.addEventListener("resize", () => {
       if (window.innerWidth < 750) {
@@ -54,13 +52,13 @@ const Login = () => {
     });
   }, []);
   const saveUserInfoToDb = async (email, name, phone) => {
-    const res = await axios.post("http://localhost:8080/api/v1/user", {
+    const res = await axios.post(`${baseUrs()}/user`, {
       email,
       name,
       phone,
     });
+    console.log(res);
 
-    console.log(res,"res save user info");
   };
   const { handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { mobileno: "", password: "", name: "", email: "" },

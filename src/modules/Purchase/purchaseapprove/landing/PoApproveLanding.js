@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import CustomCommonTable from "./../../../../common/CustomCommonTable";
 import { TableRow } from "@mui/material";
@@ -11,6 +12,7 @@ import Loading from "./../../../../common/loding";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import { toast } from "react-toastify";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 const PoApproveLanding = () => {
   const [user, loading] = useAuthState(auth);
   const [gridData, setGridData] = useState([]);
@@ -64,7 +66,7 @@ const PoApproveLanding = () => {
 
   const getPurchaseOrderLanding = () => {
     fetch(
-      `http://localhost:8080/api/v1/purchase?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`
+      `${baseUrs()}/purchase?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`
     )
       .then((res) => res.json())
       .then((data) => setGridData(data?.data));
@@ -76,7 +78,6 @@ const PoApproveLanding = () => {
   if (loading) {
     return <Loading />;
   }
-  console.log(gridData, "grid data ");
 
   return (
     <div className="table-responsive mt-2">
@@ -110,12 +111,9 @@ const PoApproveLanding = () => {
                       fontSize: "11px",
                     }}
                     onClick={() => {
-                      console.log(
-                        `http://localhost:8080/api/v1/purchase/${item?._id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`,
-                        "url here "
-                      );
+                
                       fetch(
-                        `http://localhost:8080/api/v1/purchase/${item?._id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`,
+                        `${baseUrs()}/purchase/${item?._id}?email=${user?.email}&branchId=${selectedBranch?.value}&status=pending`,
                         {
                           method: "PATCH",
                         }

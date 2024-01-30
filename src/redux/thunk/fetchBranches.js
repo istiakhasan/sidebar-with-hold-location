@@ -1,3 +1,4 @@
+import { baseUrs } from "../../helpers/config/config.Env";
 import actionType from "../actionTypes/actionTypes";
 const getFromLs = () => {
 
@@ -13,7 +14,7 @@ const selectedBranchFromLs = getFromLs();
 const fetchBranches = (email) => {
   return async (dispatch, getState) => {
     const res = await fetch(
-      `http://localhost:8080/api/v1/branch?email=${email}`
+      `${baseUrs()}/branch?email=${email}`
     );
     const data = await res.json();
     dispatch({ type: actionType.LOAD_BRANCH, payload: data?.data });

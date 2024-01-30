@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import JsFormInput from "../../../../common/JsFormInput";
 import Select from "react-select";
@@ -16,6 +17,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.config/firebase.config";
 import Loading from "../../../../common/loding";
 import { useSelector } from "react-redux";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 const SalesOrderForm = () => {
   const [itemList, setItemList] = useState([]);
   const [customerList, setCustomerList] = useState([]);
@@ -24,12 +26,11 @@ const SalesOrderForm = () => {
   const { selectedBranch } = useSelector((state) => state?.authReducer);
   // load all available products
   const loadAllAvailAbleProducts = async (setter) => {
-    console.log("check ....");
-    const res = await axios.get(`http://localhost:8080/api/v1/stock?branchId=${selectedBranch?.value || ""}`);
+    const res = await axios.get(`${baseUrs()}/stock?email=kashem@gmail.com&branchId=${selectedBranch?.value || ""}`);
     const modifyData = res?.data?.map(
       ({ itemName, itemCode, quantity, ...rest }, i) => {
-        console.log(rest, "rest");
         return {
+          ...rest,
           label: itemName,
           value: itemCode,
           stock: quantity,
@@ -40,7 +41,7 @@ const SalesOrderForm = () => {
   };
   const loadAllAvailAbleCustomer = async (setter) => {
     const res = await axios.get(
-      "http://localhost:8080/api/v1/partner/partnerType/2?email=kashem@gmail.com"
+      `${baseUrs()}/partner/partnerType/2?email=kashem@gmail.com`
     );
     setter(res?.data?.data);
   };
@@ -55,13 +56,15 @@ const SalesOrderForm = () => {
       customer: "",
     },
     onSubmit: (value) => {
+      
       const payload = rowDto.map(({ customer, ...rest }) => {
         return {
           ...rest
         };
       });
+     
       axios
-        .post("http://localhost:8080/api/v1/sales", {
+        .post(`${baseUrs()}/sales`, {
           products:payload,
           email: user.email,
           branchId: selectedBranch?.value,
@@ -85,7 +88,7 @@ const SalesOrderForm = () => {
     if (!isSupplierExist && rowDto?.length > 0) {
       return toast.error("Please select one supplier at a time  ");
     }
-
+      
     if (!isItemExist) {
       setter([
         ...rowDto,
@@ -93,6 +96,8 @@ const SalesOrderForm = () => {
           item: valueOption,
           customer: values.customer,
           availableQuantity: valueOption?.stock,
+          itemCategory:valueOption?.itemCategory,
+          itemType:valueOption?.itemType
         },
       ]);
     } else {
@@ -185,7 +190,6 @@ const SalesOrderForm = () => {
                                 !numberRegex.test(e.target.value) &&
                                 e.target.value !== ""
                               ) {
-                                console.log("log");
                                 return toast.error(
                                   "Please enter a posetive number"
                                 );

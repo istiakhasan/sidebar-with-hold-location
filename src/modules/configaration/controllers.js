@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { baseUrs } from "../../helpers/config/config.Env";
 
 export const createPartner = async (values,userEmail,setLoading, cb) => {
   const payload = {
@@ -16,7 +17,7 @@ export const createPartner = async (values,userEmail,setLoading, cb) => {
   try {
     const res = await axios.post(
       // `https://mclone.onrender.com/api/v1/partner`,
-      `http://localhost:8080/api/v1/partner`,
+      `${baseUrs()}/partner`,
       payload
     );
     if (res?.data?.status === true) {

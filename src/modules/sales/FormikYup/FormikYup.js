@@ -49,10 +49,8 @@ const FormikYup = () => {
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
   ];
-  //   console.log(errors, "Formik values");
   const navigate = useNavigate();
 
-  //
 
   const checkData = [
     { id: 1, label: "item1" },
@@ -69,7 +67,6 @@ const FormikYup = () => {
     { id: 12, label: "item12" },
   ];
   const [data, setData] = useState(checkData);
-  console.log(values, "values checked");
   return (
     <MainLayout>
       <small

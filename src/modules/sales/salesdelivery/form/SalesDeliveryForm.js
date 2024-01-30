@@ -1,12 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import JsFormInput from "../../../../common/JsFormInput";
-import Select from "react-select";
-import customStyles from "../../../../common/customStyles";
 import { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
 import { useFormik } from "formik";
-import MuiCommonIcon from "../../../../common/MuiCommonIcon";
 import { toast } from "react-toastify";
 import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore";
 import { NumberFormate } from "../../../../common/NumberFormate";
@@ -17,8 +14,8 @@ import auth from "../../../../firebase.config/firebase.config";
 import Loading from "../../../../common/loding";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 const SalesDeliveryForm = ({ deliveryItem }) => {
-  const [rowDto, setRowDto] = useState(deliveryItem);
   const [user, loading] = useAuthState(auth);
   const { selectedBranch } = useSelector((state) => state?.authReducer);
   const [mergeProduct, setMergeProduct] = useState([]);
@@ -26,10 +23,9 @@ const SalesDeliveryForm = ({ deliveryItem }) => {
   const {
     data: inventory_product,
     isLoading,
-    error,
   } = useQuery(["stock_quantity", selectedBranch?.value], async () => {
     const res = await fetch(
-      `http://localhost:8080/api/v1/stock?email=${user.email}&branchId=${
+      `${baseUrs()}/stock?email=${user.email}&branchId=${
         selectedBranch?.value || ""
       }`
     );
@@ -47,19 +43,33 @@ const SalesDeliveryForm = ({ deliveryItem }) => {
         ...item,
         stock_quantity: stock_product?.quantity,
         stock: stock_product?.quantity,
+        branchId:deliveryItem?.branchId,
+        email:deliveryItem?.email,
       };
     });
+   
     setMergeProduct(modifyed_product);
   }, [inventory_product]);
 
-  const { values, handleSubmit, setFieldValue } = useFormik({
+  const { handleSubmit } = useFormik({
     initialValues:{
 
     },
     onSubmit: (value) => {
-      console.log(mergeProduct, "merge product");
-    },
-  });
+      fetch(`${baseUrs()}/stock/salse-order?baseId=${deliveryItem?._id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(mergeProduct),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.message === "Success") {
+           console.log("success,success");
+          }
+        })
+  }});
 
   if (isLoading) {
     return;
@@ -197,7 +207,6 @@ const SalesDeliveryForm = ({ deliveryItem }) => {
         >
           <span>Item Price</span>
           <span style={{ fontWeight: "normal" }}>
-          {console.log(mergeProduct,"merge product")}
             {mergeProduct?.reduce(
               (pre, next) =>
                 +pre + (+next?.purchase_quantity * +next?.purchase_price || 0),

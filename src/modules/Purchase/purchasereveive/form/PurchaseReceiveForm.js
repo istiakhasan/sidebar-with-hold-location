@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import moment from "moment";
 import React, { useState } from "react";
 import { useEffect } from "react";
@@ -6,7 +7,7 @@ import { toast } from "react-toastify";
 import HookFormInput from "../../../../common/HookFormInput";
 import JsButton from "../../../../common/JsButton";
 import JsFormInput from "../../../../common/JsFormInput";
-import { getPurchaseOrderReveiveLanding } from "../utils/purchasereceiveutils";
+import { baseUrs } from "../../../../helpers/config/config.Env";
 const PurchaseReceiveForm = ({
   saveRef,
   // rowDto,
@@ -19,7 +20,7 @@ const PurchaseReceiveForm = ({
   const [rowDto, setRowDto] = useState({});
   const getPurchaseReciveById = () => {
     fetch(
-      `http://localhost:8080/api/v1/purchase/purchasereceive/${currentRowId}?email=${user?.email}&branchId=${selectedBranch?.value}&status=receive`
+      `${baseUrs()}/purchase/purchasereceive/${currentRowId}?email=${user?.email}&branchId=${selectedBranch?.value}&status=receive`
     )
       .then((res) => res.json())
       .then((data) => setRowDto(data?.data));
@@ -27,7 +28,6 @@ const PurchaseReceiveForm = ({
   useEffect(() => {
     getPurchaseReciveById();
   }, [currentRowId]);
-  console.log(currentRowId, "check");
   const handleModifyPropertyy = (i, value, setter, obj, property) => {
     const _data = { ...obj };
     _data.product[i][property] = value;
@@ -42,7 +42,7 @@ const PurchaseReceiveForm = ({
         return d;
       });
 
-    fetch("http://localhost:8080/api/v1/stock", {
+    fetch(`${baseUrs()}/stock`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
